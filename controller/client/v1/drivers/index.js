@@ -10,6 +10,7 @@ const addDriversUsecase = require('../../../../use-case/drivers/addDrivers')({
   driversDb,
   createValidation 
 });
+const bulkInsertDriversUsecase = require('../../../../use-case/drivers/bulkInsertDrivers')({ driversDb });
 const findAllDriversUsecase = require('../../../../use-case/drivers/findAllDrivers')({
   driversDb,
   filterValidation
@@ -27,6 +28,7 @@ const updateDriversUsecase = require('../../../../use-case/drivers/updateDrivers
   updateValidation 
 });
 const partialUpdateDriversUsecase = require('../../../../use-case/drivers/partialUpdateDrivers')({ driversDb });
+const bulkUpdateDriversUsecase = require('../../../../use-case/drivers/bulkUpdateDrivers')({ driversDb });
 const softDeleteDriversUsecase = require('../../../../use-case/drivers/softDeleteDrivers')({
   driversDb,
   vehiclesDb
@@ -35,8 +37,6 @@ const softDeleteManyDriversUsecase = require('../../../../use-case/drivers/softD
   driversDb,
   vehiclesDb
 });
-const bulkInsertDriversUsecase = require('../../../../use-case/drivers/bulkInsertDrivers')({ driversDb });
-const bulkUpdateDriversUsecase = require('../../../../use-case/drivers/bulkUpdateDrivers')({ driversDb });
 const deleteDriversUsecase = require('../../../../use-case/drivers/deleteDrivers')({
   driversDb,
   vehiclesDb
@@ -49,29 +49,29 @@ const deleteManyDriversUsecase = require('../../../../use-case/drivers/deleteMan
 const driversController = require('./drivers');
 
 const addDrivers = driversController.addDrivers(addDriversUsecase);
+const bulkInsertDrivers = driversController.bulkInsertDrivers(bulkInsertDriversUsecase);
 const findAllDrivers = driversController.findAllDrivers(findAllDriversUsecase);
 const getDriversCount = driversController.getDriversCount(getDriversCountUsecase);
 const getDriversById = driversController.getDrivers(getDriversUsecase);
 const updateDrivers = driversController.updateDrivers(updateDriversUsecase);
 const partialUpdateDrivers = driversController.partialUpdateDrivers(partialUpdateDriversUsecase);
+const bulkUpdateDrivers = driversController.bulkUpdateDrivers(bulkUpdateDriversUsecase);
 const softDeleteDrivers = driversController.softDeleteDrivers(softDeleteDriversUsecase);
 const softDeleteManyDrivers = driversController.softDeleteManyDrivers(softDeleteManyDriversUsecase);
-const bulkInsertDrivers = driversController.bulkInsertDrivers(bulkInsertDriversUsecase);
-const bulkUpdateDrivers = driversController.bulkUpdateDrivers(bulkUpdateDriversUsecase);
 const deleteDrivers = driversController.deleteDrivers(deleteDriversUsecase);
 const deleteManyDrivers = driversController.deleteManyDrivers(deleteManyDriversUsecase);
 
 module.exports = {
   addDrivers,
+  bulkInsertDrivers,
   findAllDrivers,
   getDriversCount,
   getDriversById,
   updateDrivers,
   partialUpdateDrivers,
+  bulkUpdateDrivers,
   softDeleteDrivers,
   softDeleteManyDrivers,
-  bulkInsertDrivers,
-  bulkUpdateDrivers,
   deleteDrivers,
   deleteManyDrivers,
 };

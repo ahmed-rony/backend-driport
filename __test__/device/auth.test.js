@@ -27,27 +27,27 @@ beforeAll(async function (){
     const dbInstance = client.db('Dhiwise_test');
     const companies = dbInstance.collection('companies');
     insertedCompanies = await companies.insertOne({
-      companyName: 'Senior',
-      email: 'Domenic83@hotmail.com',
-      registrationNumber: 'open-source',
-      otherData: 'Chair',
-      id: '649f303ef65f02657c757353'
+      companyName: 'Borders',
+      email: 'Norberto_OKon@yahoo.com',
+      registrationNumber: 'Advanced',
+      otherData: 'payment',
+      id: '649f3c3aa3731b77608b2859'
     });
     const users = dbInstance.collection('users');
     insertedUsers = await users.insertOne({
-      name: 'Kay Wiegand',
-      email: 'Viola5@gmail.com',
-      password: '6kSFF56GJT0rN9s',
-      role: 'embrace',
-      companyId: '649f303ef65f02657c757357',
-      userType: 23,
-      mobileNo: '(152) 074-2549',
-      username: 'Edward_Wiza3',
+      name: 'Dr. Candice Mueller',
+      email: 'Angelo.Swaniawski43@gmail.com',
+      password: 'EGBxQaeR6u8h9Hc',
+      role: 'Nakfa',
+      companyId: '649f3c3aa3731b77608b285d',
+      userType: 895,
+      mobileNo: '(959) 068-8174',
+      username: 'Janick_Little34',
       loginOTP: {},
       resetPasswordLink: {},
-      loginRetryLimit: 354,
-      loginReactiveTime: '2024-02-23T04:33:10.376Z',
-      id: '649f303ef65f02657c757358'
+      loginRetryLimit: 772,
+      loginReactiveTime: '2024-03-07T14:05:44.940Z',
+      id: '649f3c3aa3731b77608b285e'
     });
   }
   catch (error) {
@@ -65,13 +65,13 @@ describe('POST /register -> if email and username is given', () => {
     let registeredUser = await request(app)
       .post('/device/auth/register')
       .send({
-        'name':'Wilbur Armstrong',
-        'email':'Cristal.Spinka39@hotmail.com',
-        'password':'chNPZzV1p02BDyT',
+        'name':'Rosalie McLaughlin',
+        'email':'Reid_Quitzon96@hotmail.com',
+        'password':'18WHOR0Ey_Qd3a5',
         'companyId':insertedCompanies.insertedId,
         'userType':authConstant.USER_TYPES.User,
-        'mobileNo':'(734) 036-1386',
-        'username':'Chelsey84',
+        'mobileNo':'(820) 234-4957',
+        'username':'Candido_Schumm85',
         'addedBy':insertedUsers.insertedId,
         'updatedBy':insertedUsers.insertedId
       });
@@ -88,8 +88,8 @@ describe('POST /login -> if username and password is correct', () => {
       .post('/device/auth/login')
       .send(
         {
-          username: 'Chelsey84',
-          password: 'chNPZzV1p02BDyT'
+          username: 'Candido_Schumm85',
+          password: '18WHOR0Ey_Qd3a5'
         }
       );
       
@@ -109,7 +109,7 @@ describe('POST /login -> if username is incorrect', () => {
       .send(
         {
           username: 'wrong.username',
-          password: 'chNPZzV1p02BDyT'
+          password: '18WHOR0Ey_Qd3a5'
         }
       );
 
@@ -124,7 +124,7 @@ describe('POST /login -> if password is incorrect', () => {
       .post('/device/auth/login')
       .send(
         {
-          username: 'Chelsey84',
+          username: 'Candido_Schumm85',
           password: 'wrong@password'
         }
       );
@@ -171,7 +171,7 @@ describe('POST /forgot-password -> if email passed from request body is valid an
   test('should return success message', async () => {
     let users = await request(app)
       .post('/device/auth/forgot-password')
-      .send({ 'email':'Cristal.Spinka39@hotmail.com', });
+      .send({ 'email':'Reid_Quitzon96@hotmail.com', });
 
     expect(users.statusCode).toBe(200);
     expect(users.body.status).toBe('SUCCESS');
@@ -184,8 +184,8 @@ describe('POST /validate-otp -> OTP is sent in request body and OTP is correct',
       .post('/device/auth/login')
       .send(
         {
-          username: 'Chelsey84',
-          password: 'chNPZzV1p02BDyT'
+          username: 'Candido_Schumm85',
+          password: '18WHOR0Ey_Qd3a5'
         }).then(login => () => {
         return request(app)
           .get(`/device/api/v1/users/${login.body.data.id}`)
@@ -232,8 +232,8 @@ describe('PUT /reset-password -> code is sent in request body and code is correc
       .post('/device/auth/login')
       .send(
         {
-          username: 'Chelsey84',
-          password: 'chNPZzV1p02BDyT'
+          username: 'Candido_Schumm85',
+          password: '18WHOR0Ey_Qd3a5'
         }).then(login => () => {
         return request(app)
           .get(`/device/api/v1/users/${login.body.data.id}`)

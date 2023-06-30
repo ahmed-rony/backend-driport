@@ -11,6 +11,7 @@ const addVehiclesUsecase = require('../../../../use-case/vehicles/addVehicles')(
   vehiclesDb,
   createValidation 
 });
+const bulkInsertVehiclesUsecase = require('../../../../use-case/vehicles/bulkInsertVehicles')({ vehiclesDb });
 const findAllVehiclesUsecase = require('../../../../use-case/vehicles/findAllVehicles')({
   vehiclesDb,
   filterValidation
@@ -28,6 +29,7 @@ const updateVehiclesUsecase = require('../../../../use-case/vehicles/updateVehic
   updateValidation 
 });
 const partialUpdateVehiclesUsecase = require('../../../../use-case/vehicles/partialUpdateVehicles')({ vehiclesDb });
+const bulkUpdateVehiclesUsecase = require('../../../../use-case/vehicles/bulkUpdateVehicles')({ vehiclesDb });
 const softDeleteVehiclesUsecase = require('../../../../use-case/vehicles/softDeleteVehicles')({
   vehiclesDb,
   reportsDb,
@@ -38,8 +40,6 @@ const softDeleteManyVehiclesUsecase = require('../../../../use-case/vehicles/sof
   reportsDb,
   driversDb
 });
-const bulkInsertVehiclesUsecase = require('../../../../use-case/vehicles/bulkInsertVehicles')({ vehiclesDb });
-const bulkUpdateVehiclesUsecase = require('../../../../use-case/vehicles/bulkUpdateVehicles')({ vehiclesDb });
 const deleteVehiclesUsecase = require('../../../../use-case/vehicles/deleteVehicles')({
   vehiclesDb,
   reportsDb,
@@ -54,29 +54,29 @@ const deleteManyVehiclesUsecase = require('../../../../use-case/vehicles/deleteM
 const vehiclesController = require('./vehicles');
 
 const addVehicles = vehiclesController.addVehicles(addVehiclesUsecase);
+const bulkInsertVehicles = vehiclesController.bulkInsertVehicles(bulkInsertVehiclesUsecase);
 const findAllVehicles = vehiclesController.findAllVehicles(findAllVehiclesUsecase);
 const getVehiclesCount = vehiclesController.getVehiclesCount(getVehiclesCountUsecase);
 const getVehiclesById = vehiclesController.getVehicles(getVehiclesUsecase);
 const updateVehicles = vehiclesController.updateVehicles(updateVehiclesUsecase);
 const partialUpdateVehicles = vehiclesController.partialUpdateVehicles(partialUpdateVehiclesUsecase);
+const bulkUpdateVehicles = vehiclesController.bulkUpdateVehicles(bulkUpdateVehiclesUsecase);
 const softDeleteVehicles = vehiclesController.softDeleteVehicles(softDeleteVehiclesUsecase);
 const softDeleteManyVehicles = vehiclesController.softDeleteManyVehicles(softDeleteManyVehiclesUsecase);
-const bulkInsertVehicles = vehiclesController.bulkInsertVehicles(bulkInsertVehiclesUsecase);
-const bulkUpdateVehicles = vehiclesController.bulkUpdateVehicles(bulkUpdateVehiclesUsecase);
 const deleteVehicles = vehiclesController.deleteVehicles(deleteVehiclesUsecase);
 const deleteManyVehicles = vehiclesController.deleteManyVehicles(deleteManyVehiclesUsecase);
 
 module.exports = {
   addVehicles,
+  bulkInsertVehicles,
   findAllVehicles,
   getVehiclesCount,
   getVehiclesById,
   updateVehicles,
   partialUpdateVehicles,
+  bulkUpdateVehicles,
   softDeleteVehicles,
   softDeleteManyVehicles,
-  bulkInsertVehicles,
-  bulkUpdateVehicles,
   deleteVehicles,
   deleteManyVehicles,
 };

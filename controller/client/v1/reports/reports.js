@@ -5,7 +5,6 @@ const getSelectObject = require('../../../../utils/getSelectObject');
 const addReports = (addReportsUsecase) => async (req,res) => {
   try {
     let dataToCreate = { ...req.body || {} };
-    dataToCreate.addedBy = req.user.id;
     let result = await addReportsUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -16,12 +15,6 @@ const addReports = (addReportsUsecase) => async (req,res) => {
 const bulkInsertReports = (bulkInsertReportsUsecase)=> async (req,res) => {
   try {
     let dataToCreate = [...req.body.data];
-    for (let i = 0;i < dataToCreate.length;i++){
-      dataToCreate[i] = {
-        ...dataToCreate[i],
-        addedBy:req.user.id,
-      };
-    }
     let result = await bulkInsertReportsUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -78,8 +71,6 @@ const updateReports = (updateReportsUsecase) => async (req,res) =>{
     }
     let dataToUpdate = { ...req.body || {} };
     let query = { _id: req.params.id };
-    delete dataToUpdate.addedBy;
-    dataToUpdate.updatedBy = req.user.id;
     let result = await updateReportsUsecase({
       dataToUpdate,
       query
@@ -94,8 +85,6 @@ const bulkUpdateReports = (bulkUpdateReportsUsecase) => async (req,res) => {
   try {
     let dataToUpdate = { ...req.body.data || {} };
     let query = { ...req.body.filter || {} };
-    delete dataToUpdate.addedBy;
-    dataToUpdate.updatedBy = req.user.id;
     let result = await bulkUpdateReportsUsecase({
       dataToUpdate,
       query
@@ -113,7 +102,6 @@ const partialUpdateReports = (partialUpdateReportsUsecase) => async (req,res) =>
     }
     let query = { _id: req.params.id };
     let dataToUpdate = { ...req.body || {} };
-    dataToUpdate.updatedBy = req.user.id;
     let result = await partialUpdateReportsUsecase({
       dataToUpdate,
       query
@@ -130,10 +118,7 @@ const softDeleteReports = (softDeleteReportsUsecase) => async (req,res)=>{
       return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! id is required.' }));
     }
     let query = { _id: req.params.id };
-    const dataToUpdate = {
-      isDeleted: true,
-      updatedBy: req.user.id,
-    };
+    const dataToUpdate = { isDeleted: true, };
     let result = await softDeleteReportsUsecase({
       query,
       dataToUpdate
@@ -178,10 +163,7 @@ const softDeleteManyReports = (softDeleteManyReportsUsecase) => async (req,res) 
     }
     let ids = req.body.ids;
     let query = { _id : { $in:ids } };
-    const dataToUpdate = {
-      isDeleted: true,
-      updatedBy: req.user.id
-    };
+    const dataToUpdate = { isDeleted: true, };
     let result = await softDeleteManyReportsUsecase({
       query,
       dataToUpdate
