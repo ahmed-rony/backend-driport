@@ -12,6 +12,7 @@ const addCompaniesUsecase = require('../../../../use-case/companies/addCompanies
   companiesDb,
   createValidation 
 });
+const bulkInsertCompaniesUsecase = require('../../../../use-case/companies/bulkInsertCompanies')({ companiesDb });
 const findAllCompaniesUsecase = require('../../../../use-case/companies/findAllCompanies')({
   companiesDb,
   filterValidation
@@ -29,6 +30,7 @@ const updateCompaniesUsecase = require('../../../../use-case/companies/updateCom
   updateValidation 
 });
 const partialUpdateCompaniesUsecase = require('../../../../use-case/companies/partialUpdateCompanies')({ companiesDb });
+const bulkUpdateCompaniesUsecase = require('../../../../use-case/companies/bulkUpdateCompanies')({ companiesDb });
 const softDeleteCompaniesUsecase = require('../../../../use-case/companies/softDeleteCompanies')({
   companiesDb,
   reportsDb,
@@ -41,8 +43,6 @@ const softDeleteManyCompaniesUsecase = require('../../../../use-case/companies/s
   vehiclesDb,
   usersDb
 });
-const bulkInsertCompaniesUsecase = require('../../../../use-case/companies/bulkInsertCompanies')({ companiesDb });
-const bulkUpdateCompaniesUsecase = require('../../../../use-case/companies/bulkUpdateCompanies')({ companiesDb });
 const deleteCompaniesUsecase = require('../../../../use-case/companies/deleteCompanies')({
   companiesDb,
   reportsDb,
@@ -59,29 +59,29 @@ const deleteManyCompaniesUsecase = require('../../../../use-case/companies/delet
 const companiesController = require('./companies');
 
 const addCompanies = companiesController.addCompanies(addCompaniesUsecase);
+const bulkInsertCompanies = companiesController.bulkInsertCompanies(bulkInsertCompaniesUsecase);
 const findAllCompanies = companiesController.findAllCompanies(findAllCompaniesUsecase);
 const getCompaniesCount = companiesController.getCompaniesCount(getCompaniesCountUsecase);
 const getCompaniesById = companiesController.getCompanies(getCompaniesUsecase);
 const updateCompanies = companiesController.updateCompanies(updateCompaniesUsecase);
 const partialUpdateCompanies = companiesController.partialUpdateCompanies(partialUpdateCompaniesUsecase);
+const bulkUpdateCompanies = companiesController.bulkUpdateCompanies(bulkUpdateCompaniesUsecase);
 const softDeleteCompanies = companiesController.softDeleteCompanies(softDeleteCompaniesUsecase);
 const softDeleteManyCompanies = companiesController.softDeleteManyCompanies(softDeleteManyCompaniesUsecase);
-const bulkInsertCompanies = companiesController.bulkInsertCompanies(bulkInsertCompaniesUsecase);
-const bulkUpdateCompanies = companiesController.bulkUpdateCompanies(bulkUpdateCompaniesUsecase);
 const deleteCompanies = companiesController.deleteCompanies(deleteCompaniesUsecase);
 const deleteManyCompanies = companiesController.deleteManyCompanies(deleteManyCompaniesUsecase);
 
 module.exports = {
   addCompanies,
+  bulkInsertCompanies,
   findAllCompanies,
   getCompaniesCount,
   getCompaniesById,
   updateCompanies,
   partialUpdateCompanies,
+  bulkUpdateCompanies,
   softDeleteCompanies,
   softDeleteManyCompanies,
-  bulkInsertCompanies,
-  bulkUpdateCompanies,
   deleteCompanies,
   deleteManyCompanies,
 };

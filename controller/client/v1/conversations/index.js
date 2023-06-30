@@ -10,6 +10,7 @@ const addConversationsUsecase = require('../../../../use-case/conversations/addC
   conversationsDb,
   createValidation 
 });
+const bulkInsertConversationsUsecase = require('../../../../use-case/conversations/bulkInsertConversations')({ conversationsDb });
 const findAllConversationsUsecase = require('../../../../use-case/conversations/findAllConversations')({
   conversationsDb,
   filterValidation
@@ -27,6 +28,7 @@ const updateConversationsUsecase = require('../../../../use-case/conversations/u
   updateValidation 
 });
 const partialUpdateConversationsUsecase = require('../../../../use-case/conversations/partialUpdateConversations')({ conversationsDb });
+const bulkUpdateConversationsUsecase = require('../../../../use-case/conversations/bulkUpdateConversations')({ conversationsDb });
 const softDeleteConversationsUsecase = require('../../../../use-case/conversations/softDeleteConversations')({
   conversationsDb,
   reportsDb
@@ -35,8 +37,6 @@ const softDeleteManyConversationsUsecase = require('../../../../use-case/convers
   conversationsDb,
   reportsDb
 });
-const bulkInsertConversationsUsecase = require('../../../../use-case/conversations/bulkInsertConversations')({ conversationsDb });
-const bulkUpdateConversationsUsecase = require('../../../../use-case/conversations/bulkUpdateConversations')({ conversationsDb });
 const deleteConversationsUsecase = require('../../../../use-case/conversations/deleteConversations')({
   conversationsDb,
   reportsDb
@@ -49,29 +49,29 @@ const deleteManyConversationsUsecase = require('../../../../use-case/conversatio
 const conversationsController = require('./conversations');
 
 const addConversations = conversationsController.addConversations(addConversationsUsecase);
+const bulkInsertConversations = conversationsController.bulkInsertConversations(bulkInsertConversationsUsecase);
 const findAllConversations = conversationsController.findAllConversations(findAllConversationsUsecase);
 const getConversationsCount = conversationsController.getConversationsCount(getConversationsCountUsecase);
 const getConversationsById = conversationsController.getConversations(getConversationsUsecase);
 const updateConversations = conversationsController.updateConversations(updateConversationsUsecase);
 const partialUpdateConversations = conversationsController.partialUpdateConversations(partialUpdateConversationsUsecase);
+const bulkUpdateConversations = conversationsController.bulkUpdateConversations(bulkUpdateConversationsUsecase);
 const softDeleteConversations = conversationsController.softDeleteConversations(softDeleteConversationsUsecase);
 const softDeleteManyConversations = conversationsController.softDeleteManyConversations(softDeleteManyConversationsUsecase);
-const bulkInsertConversations = conversationsController.bulkInsertConversations(bulkInsertConversationsUsecase);
-const bulkUpdateConversations = conversationsController.bulkUpdateConversations(bulkUpdateConversationsUsecase);
 const deleteConversations = conversationsController.deleteConversations(deleteConversationsUsecase);
 const deleteManyConversations = conversationsController.deleteManyConversations(deleteManyConversationsUsecase);
 
 module.exports = {
   addConversations,
+  bulkInsertConversations,
   findAllConversations,
   getConversationsCount,
   getConversationsById,
   updateConversations,
   partialUpdateConversations,
+  bulkUpdateConversations,
   softDeleteConversations,
   softDeleteManyConversations,
-  bulkInsertConversations,
-  bulkUpdateConversations,
   deleteConversations,
   deleteManyConversations,
 };

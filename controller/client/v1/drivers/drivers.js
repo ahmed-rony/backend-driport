@@ -5,7 +5,6 @@ const getSelectObject = require('../../../../utils/getSelectObject');
 const addDrivers = (addDriversUsecase) => async (req,res) => {
   try {
     let dataToCreate = { ...req.body || {} };
-    dataToCreate.addedBy = req.user.id;
     let result = await addDriversUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -16,12 +15,6 @@ const addDrivers = (addDriversUsecase) => async (req,res) => {
 const bulkInsertDrivers = (bulkInsertDriversUsecase)=> async (req,res) => {
   try {
     let dataToCreate = [...req.body.data];
-    for (let i = 0;i < dataToCreate.length;i++){
-      dataToCreate[i] = {
-        ...dataToCreate[i],
-        addedBy:req.user.id,
-      };
-    }
     let result = await bulkInsertDriversUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -78,8 +71,6 @@ const updateDrivers = (updateDriversUsecase) => async (req,res) =>{
     }
     let dataToUpdate = { ...req.body || {} };
     let query = { _id: req.params.id };
-    delete dataToUpdate.addedBy;
-    dataToUpdate.updatedBy = req.user.id;
     let result = await updateDriversUsecase({
       dataToUpdate,
       query
@@ -94,8 +85,6 @@ const bulkUpdateDrivers = (bulkUpdateDriversUsecase) => async (req,res) => {
   try {
     let dataToUpdate = { ...req.body.data || {} };
     let query = { ...req.body.filter || {} };
-    delete dataToUpdate.addedBy;
-    dataToUpdate.updatedBy = req.user.id;
     let result = await bulkUpdateDriversUsecase({
       dataToUpdate,
       query
@@ -113,7 +102,6 @@ const partialUpdateDrivers = (partialUpdateDriversUsecase) => async (req,res) =>
     }
     let query = { _id: req.params.id };
     let dataToUpdate = { ...req.body || {} };
-    dataToUpdate.updatedBy = req.user.id;
     let result = await partialUpdateDriversUsecase({
       dataToUpdate,
       query
@@ -130,10 +118,7 @@ const softDeleteDrivers = (softDeleteDriversUsecase) => async (req,res) => {
       return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! id is required.' }));
     }
     let query = { _id: req.params.id };
-    const dataToUpdate = {
-      isDeleted: true,
-      updatedBy: req.user.id,
-    };
+    const dataToUpdate = { isDeleted: true, };
     let result = await softDeleteDriversUsecase({
       query,
       dataToUpdate,
@@ -185,10 +170,7 @@ const softDeleteManyDrivers = (softDeleteManyDriversUsecase) => async (req,res) 
     }
     let ids = req.body.ids;
     let query = { _id : { $in:ids } };
-    const dataToUpdate = {
-      isDeleted: true,
-      updatedBy: req.user.id,
-    };
+    const dataToUpdate = { isDeleted: true, };
     let result = await softDeleteManyDriversUsecase({
       query,
       dataToUpdate,

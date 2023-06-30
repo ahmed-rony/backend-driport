@@ -5,7 +5,6 @@ const getSelectObject = require('../../../../utils/getSelectObject');
 const addCompanies = (addCompaniesUsecase) => async (req,res) => {
   try {
     let dataToCreate = { ...req.body || {} };
-    dataToCreate.addedBy = req.user.id;
     let result = await addCompaniesUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -16,12 +15,6 @@ const addCompanies = (addCompaniesUsecase) => async (req,res) => {
 const bulkInsertCompanies = (bulkInsertCompaniesUsecase)=> async (req,res) => {
   try {
     let dataToCreate = [...req.body.data];
-    for (let i = 0;i < dataToCreate.length;i++){
-      dataToCreate[i] = {
-        ...dataToCreate[i],
-        addedBy:req.user.id,
-      };
-    }
     let result = await bulkInsertCompaniesUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -78,8 +71,6 @@ const updateCompanies = (updateCompaniesUsecase) => async (req,res) =>{
     }
     let dataToUpdate = { ...req.body || {} };
     let query = { _id: req.params.id };
-    delete dataToUpdate.addedBy;
-    dataToUpdate.updatedBy = req.user.id;
     let result = await updateCompaniesUsecase({
       dataToUpdate,
       query
@@ -94,8 +85,6 @@ const bulkUpdateCompanies = (bulkUpdateCompaniesUsecase) => async (req,res) => {
   try {
     let dataToUpdate = { ...req.body.data || {} };
     let query = { ...req.body.filter || {} };
-    delete dataToUpdate.addedBy;
-    dataToUpdate.updatedBy = req.user.id;
     let result = await bulkUpdateCompaniesUsecase({
       dataToUpdate,
       query
@@ -113,7 +102,6 @@ const partialUpdateCompanies = (partialUpdateCompaniesUsecase) => async (req,res
     }
     let query = { _id: req.params.id };
     let dataToUpdate = { ...req.body || {} };
-    dataToUpdate.updatedBy = req.user.id;
     let result = await partialUpdateCompaniesUsecase({
       dataToUpdate,
       query
@@ -130,10 +118,7 @@ const softDeleteCompanies = (softDeleteCompaniesUsecase) => async (req,res) => {
       return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! id is required.' }));
     }
     let query = { _id: req.params.id };
-    const dataToUpdate = {
-      isDeleted: true,
-      updatedBy: req.user.id,
-    };
+    const dataToUpdate = { isDeleted: true, };
     let result = await softDeleteCompaniesUsecase({
       query,
       dataToUpdate,
@@ -185,10 +170,7 @@ const softDeleteManyCompanies = (softDeleteManyCompaniesUsecase) => async (req,r
     }
     let ids = req.body.ids;
     let query = { _id : { $in:ids } };
-    const dataToUpdate = {
-      isDeleted: true,
-      updatedBy: req.user.id,
-    };
+    const dataToUpdate = { isDeleted: true, };
     let result = await softDeleteManyCompaniesUsecase({
       query,
       dataToUpdate,
