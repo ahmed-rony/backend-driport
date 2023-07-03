@@ -47,10 +47,6 @@ const schema = new Schema({
   },
   mobileNo: { type:String },
   username: { type:String },
-  loginOTP: {
-    code:String,
-    expireTime:Date
-  },
   resetPasswordLink: {
     code:String,
     expireTime:Date

@@ -11,7 +11,6 @@ const listEndpoints = require('express-list-endpoints');
 let logger = require('morgan');
 const passport = require('passport');
 
-const { devicePassportStrategy } = require('./middleware');
 const { clientPassportStrategy } = require('./middleware');
 const { adminPassportStrategy } = require('./middleware');
 
@@ -22,11 +21,11 @@ app.use(cors(corsOptions));
 //template engine
 app.set('view engine', 'ejs'); 
 app.set('views', path.join(__dirname, 'views'));
+app.use(require('./middleware/activityLog').addActivityLog);
 
 //all routes 
 const routes =  require('./routes');
 
-devicePassportStrategy(passport);
 clientPassportStrategy(passport);
 adminPassportStrategy(passport);
 

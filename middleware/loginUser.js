@@ -6,7 +6,6 @@
 const jwt = require('jsonwebtoken');
 const { PLATFORM } = require('../constants/authConstant');
 const response = require('../utils/response');
-const deviceSecret = require('../constants/authConstant').JWT.DEVICE_SECRET;
 const clientSecret = require('../constants/authConstant').JWT.CLIENT_SECRET;
 const adminSecret = require('../constants/authConstant').JWT.ADMIN_SECRET;
 const authenticateJWT = (platform) =>  (req, res, next) => {
@@ -14,10 +13,7 @@ const authenticateJWT = (platform) =>  (req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(' ')[1];
     let secret = '';
-    if (platform == PLATFORM.DEVICE){
-      secret = deviceSecret;
-    }
-    else if (platform == PLATFORM.CLIENT){
+    if (platform == PLATFORM.CLIENT){
       secret = clientSecret;
     }
     else if (platform == PLATFORM.ADMIN){

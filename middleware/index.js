@@ -15,14 +15,12 @@ const checkRolePermission = require('./checkRolePermission')({
   projectRouteDb
 });
 
-const devicePassportStrategy = require('./devicePassportStrategy')({ usersDb });
 const clientPassportStrategy = require('./clientPassportStrategy')({ usersDb });
 const adminPassportStrategy = require('./adminPassportStrategy')({ usersDb });
 
 module.exports = {
   auth,
   checkRolePermission,
-  devicePassportStrategy,
   clientPassportStrategy,
   adminPassportStrategy,
 };

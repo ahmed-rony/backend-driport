@@ -5,6 +5,7 @@ const getSelectObject = require('../../../../utils/getSelectObject');
 const addVehicles = (addVehiclesUsecase) => async (req,res) => {
   try {
     let dataToCreate = { ...req.body || {} };
+    dataToCreate.addedBy = req.user.id;
     let result = await addVehiclesUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -15,6 +16,12 @@ const addVehicles = (addVehiclesUsecase) => async (req,res) => {
 const bulkInsertVehicles = (bulkInsertVehiclesUsecase)=> async (req,res) => {
   try {
     let dataToCreate = [...req.body.data];
+    for (let i = 0;i < dataToCreate.length;i++){
+      dataToCreate[i] = {
+        ...dataToCreate[i],
+        addedBy:req.user.id,
+      };
+    }
     let result = await bulkInsertVehiclesUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -71,6 +78,8 @@ const updateVehicles = (updateVehiclesUsecase) => async (req,res) =>{
     }
     let dataToUpdate = { ...req.body || {} };
     let query = { _id: req.params.id };
+    delete dataToUpdate.addedBy;
+    dataToUpdate.updatedBy = req.user.id;
     let result = await updateVehiclesUsecase({
       dataToUpdate,
       query
@@ -85,6 +94,8 @@ const bulkUpdateVehicles = (bulkUpdateVehiclesUsecase) => async (req,res) => {
   try {
     let dataToUpdate = { ...req.body.data || {} };
     let query = { ...req.body.filter || {} };
+    delete dataToUpdate.addedBy;
+    dataToUpdate.updatedBy = req.user.id;
     let result = await bulkUpdateVehiclesUsecase({
       dataToUpdate,
       query
@@ -102,6 +113,7 @@ const partialUpdateVehicles = (partialUpdateVehiclesUsecase) => async (req,res) 
     }
     let query = { _id: req.params.id };
     let dataToUpdate = { ...req.body || {} };
+    dataToUpdate.updatedBy = req.user.id;
     let result = await partialUpdateVehiclesUsecase({
       dataToUpdate,
       query
@@ -118,7 +130,10 @@ const softDeleteVehicles = (softDeleteVehiclesUsecase) => async (req,res) => {
       return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! id is required.' }));
     }
     let query = { _id: req.params.id };
-    const dataToUpdate = { isDeleted: true, };
+    const dataToUpdate = {
+      isDeleted: true,
+      updatedBy: req.user.id,
+    };
     let result = await softDeleteVehiclesUsecase({
       query,
       dataToUpdate,
@@ -170,7 +185,10 @@ const softDeleteManyVehicles = (softDeleteManyVehiclesUsecase) => async (req,res
     }
     let ids = req.body.ids;
     let query = { _id : { $in:ids } };
-    const dataToUpdate = { isDeleted: true, };
+    const dataToUpdate = {
+      isDeleted: true,
+      updatedBy: req.user.id,
+    };
     let result = await softDeleteManyVehiclesUsecase({
       query,
       dataToUpdate,
