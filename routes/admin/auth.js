@@ -4,8 +4,6 @@ const { auth } = require('../../middleware');
 const authController = require('../../controller/admin/authentication');
 const { PLATFORM } =  require('../../constants/authConstant');  
 router.route('/register').post(authController.register);
-router.route('/send_login_otp').post(authController.sendOtpForLogin);
-router.route('/login_with_otp').post(authController.loginWithOTP);
 router.route('/login').post(authController.authentication);
 router.route('/forgot-password').post(authController.forgotPassword);
 router.route('/validate-otp').post(authController.validateResetPasswordOtp);

@@ -15,7 +15,6 @@ module.exports = (users) => {
     userType: users.userType,
     mobileNo: users.mobileNo,
     username: users.username,
-    loginOTP: users.loginOTP,
     resetPasswordLink: users.resetPasswordLink,
     loginRetryLimit: users.loginRetryLimit,
     loginReactiveTime: users.loginReactiveTime,

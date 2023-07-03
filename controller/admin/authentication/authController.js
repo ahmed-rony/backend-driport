@@ -39,24 +39,6 @@ const resetPassword = (resetPasswordUsecase) => async (req,res) => {
   }
 };
 
-const sendOtpForLogin = (sendOtpForLoginUsecase) => async (req,res)=>{
-  try {
-    let result = await sendOtpForLoginUsecase(req.body);
-    return responseHandler(res,result);
-  } catch (error) {
-    return responseHandler(res,response.internalServerError({ message:error.message }));
-  }
-};
-
-const loginWithOTP = (loginWithOTPUsecase) => async (req,res) => {
-  try {
-    let result = await loginWithOTPUsecase(req.body,authConstant.PLATFORM.ADMIN);
-    return responseHandler(res,result);
-  } catch (error) {
-    return responseHandler(res,response.internalServerError({ message:error.message }));
-  }
-};
-
 const authentication = (authenticationUsecase) => async (req,res)=>{
   try {
     let result = await authenticationUsecase(req.body, authConstant.PLATFORM.ADMIN);
@@ -82,8 +64,6 @@ module.exports = {
   forgotPassword,
   validateResetPasswordOtp,
   resetPassword,
-  sendOtpForLogin,
-  loginWithOTP,
   authentication,
   logout
 };

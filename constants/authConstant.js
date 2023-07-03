@@ -4,7 +4,6 @@
  */
 
 const JWT = {
-  DEVICE_SECRET:'myjwtdevicesecret',
   CLIENT_SECRET:'myjwtclientsecret',
   ADMIN_SECRET:'myjwtadminsecret',
   EXPIRES_IN: 10000
@@ -16,21 +15,17 @@ const USER_TYPES = {
 };
 
 const PLATFORM = {
-  DEVICE:1,
-  CLIENT:2,
-  ADMIN:3,
+  CLIENT:1,
+  ADMIN:2,
 };
 
 let LOGIN_ACCESS = {
-  [USER_TYPES.User]:[PLATFORM.DEVICE,PLATFORM.CLIENT],           
+  [USER_TYPES.User]:[PLATFORM.CLIENT],           
   [USER_TYPES.Admin]:[PLATFORM.ADMIN,PLATFORM.CLIENT],           
 };
 
 const MAX_LOGIN_RETRY_LIMIT = 5;
 const LOGIN_REACTIVE_TIME = 5;
-
-const SEND_LOGIN_OTP = { EMAIL:1, };
-const DEFAULT_SEND_LOGIN_OTP = SEND_LOGIN_OTP.EMAIL;
     
 const FORGOT_PASSWORD_WITH = {
   LINK: {
@@ -46,8 +41,6 @@ module.exports = {
   PLATFORM,
   MAX_LOGIN_RETRY_LIMIT,
   LOGIN_REACTIVE_TIME,
-  SEND_LOGIN_OTP,
-  DEFAULT_SEND_LOGIN_OTP,
   FORGOT_PASSWORD_WITH,
   LOGIN_ACCESS,
 };

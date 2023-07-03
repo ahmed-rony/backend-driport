@@ -1,5 +1,5 @@
 {
-  "id": "cec37330-d801-4d0d-8f7d-0780e471ea4a",
+  "id": "6b924715-128a-4213-aaaf-4f222bc1a3bc",
   "name": "driport_bakckend_environment",
   "values": [
     {
@@ -14,6 +14,6 @@
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2023-06-30T20:34:02.889Z",
+  "_postman_exported_at": "2023-07-03T23:43:09.286Z",
   "_postman_exported_using": "Postman"
 }

@@ -61,13 +61,7 @@ const loginUser = ({
     if (!user.userType) {
       return response.badRequest({ message : 'You have not been assigned role.' });
     }
-    if (platform == PLATFORM.DEVICE){
-      if (!LOGIN_ACCESS[user.userType].includes(PLATFORM.DEVICE)){
-        return response.badRequest({ message : 'you are unable to access this platform' });
-      }
-      token = await generateToken(userData,JWT.DEVICE_SECRET);
-    }
-    else if (platform == PLATFORM.CLIENT){
+    if (platform == PLATFORM.CLIENT){
       if (!LOGIN_ACCESS[user.userType].includes(PLATFORM.CLIENT)){
         return response.badRequest({ message : 'you are unable to access this platform' });
       }

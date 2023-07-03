@@ -17,11 +17,6 @@ const forgotPasswordUsecase = require('../../../use-case/authentication/forgotPa
 const resetPasswordUsecase = require('../../../use-case/authentication/resetPassword')({ usersDb });
 const validateResetPasswordOtpUsecase = require('../../../use-case/authentication/validateResetPasswordOtp')({ usersDb });
 const logoutUsecase = require('../../../use-case/authentication/logout')({ userTokensDb });
-const sendOtpForLoginUsecase = require('../../../use-case/authentication/sendOtpForLogin')({ usersDb });
-const loginWithOTPUsecase = require('../../../use-case/authentication/loginWithOTP')({
-  usersDb,
-  userTokensDb
-});
 const authenticationUsecase = require('../../../use-case/authentication/authentication')({
   usersDb,
   userTokensDb,
@@ -34,8 +29,6 @@ const forgotPassword = authController.forgotPassword(forgotPasswordUsecase);
 const resetPassword = authController.resetPassword(resetPasswordUsecase);
 const validateResetPasswordOtp = authController.validateResetPasswordOtp(validateResetPasswordOtpUsecase);
 const logout = authController.logout(logoutUsecase);
-const sendOtpForLogin = authController.sendOtpForLogin(sendOtpForLoginUsecase);
-const loginWithOTP = authController.loginWithOTP(loginWithOTPUsecase);
 const authentication = authController.authentication(authenticationUsecase);
 
 module.exports = {
@@ -44,7 +37,5 @@ module.exports = {
   resetPassword,
   validateResetPasswordOtp,
   logout,
-  sendOtpForLogin,
-  loginWithOTP,
   authentication,
 };
