@@ -4,12 +4,12 @@
   "values": [
     {
       "key": "token",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMWRlZDVjMGFjMjAxMmFjMDI4ODkxZiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2MjkzNTEyNzAsImV4cCI6MTYyOTk1MTI3MH0.BJ-WKjNYeFDQ4pn8kfli5gwn6GLz_c3voFht20Agj9k",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OWYzM2Q0OGVkZDg4MzQ1NTcyYzE0NyIsInVzZXJuYW1lIjoiR3JleXNvbi5Hb3JjemFueSIsImlhdCI6MTY4ODE1NTgwNiwiZXhwIjoxNjg4MTY1ODA2fQ.eU6DEo4VOpFZZF2Ev-rNQs4wyvBb3dtQ7rY0GqftpwE",
       "enabled": true
     },
     {
       "key": "url",
-      "value": "http://localhost:5000",
+      "value": "https://driports.com",
       "enabled": true
     }
   ],
