@@ -2,6 +2,7 @@
  *addUsers.js
  */
 
+const authConstant = require('../../constants/authConstant');
 const  usersEntity = require('../../entities/users');
 const response = require('../../utils/response');
 /**
@@ -12,7 +13,7 @@ const response = require('../../utils/response');
  * @return {Object} : response of create. {status, message, data}
  */
 const addUsers = ({
-  usersDb,createValidation 
+  usersDb,roleDb,userRoleDb,createValidation 
 }) => async (dataToCreate,req,res) => {
   const validateRequest = await createValidation(dataToCreate);
   if (!validateRequest.isValid) {
@@ -20,6 +21,15 @@ const addUsers = ({
   }
   let users = usersEntity(dataToCreate);
   users = await usersDb.create(users);
+  if (users && users.id){
+    const defaultRole = await roleDb.findOne({ name: authConstant.DEFAULT_USER_ROLE });
+    if (defaultRole && defaultRole.id){
+      await userRoleDb.create({
+        userId: users.id,
+        roleId: defaultRole.id
+      });
+    }
+  }
   return response.success({ data:users });
 };
 module.exports = addUsers;

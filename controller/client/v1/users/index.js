@@ -17,9 +17,15 @@ const updateValidation = require('../../../../validation')(usersSchema.updateSch
 const filterValidation = require('../../../../validation')(usersSchema.filterValidationSchema);
 const addUsersUsecase = require('../../../../use-case/users/addUsers')({
   usersDb,
+  roleDb,
+  userRoleDb,
   createValidation 
 });
-const bulkInsertUsersUsecase = require('../../../../use-case/users/bulkInsertUsers')({ usersDb });
+const bulkInsertUsersUsecase = require('../../../../use-case/users/bulkInsertUsers')({
+  usersDb,
+  roleDb,
+  userRoleDb
+});
 const findAllUsersUsecase = require('../../../../use-case/users/findAllUsers')({
   usersDb,
   filterValidation

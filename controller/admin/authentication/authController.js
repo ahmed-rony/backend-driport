@@ -4,7 +4,7 @@ const responseHandler = require('../../../utils/response/responseHandler');
 
 const register = (registerUsecase) => async (req,res) => {
   try {
-    req.body.userType = authConstant.USER_TYPES.Admin;
+    req.body.userType = authConstant.USER_TYPES.User;
     let result = await registerUsecase(req.body);
     return responseHandler(res,result);
   } catch (error) {
