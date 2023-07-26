@@ -17,8 +17,11 @@ mongoosePaginate.paginate.options = { customLabels: modelCustomLabels };
 const Schema = mongoose.Schema;
 const schema = new Schema({
   companyName: { type:String },
-  email: { type:String },
   registrationNumber: { type:String },
+  email: { type:String },
+  phone: { type:String },
+  website: { type:String },
+  address: { type:String },
   otherData: { type:String },
   isDeleted: { type:Boolean },
   isActive: { type:Boolean },
