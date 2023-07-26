@@ -2,8 +2,11 @@ module.exports = (companies) => {
 
   let newCompanies = { 
     companyName: companies.companyName,
-    email: companies.email,
     registrationNumber: companies.registrationNumber,
+    email: companies.email,
+    phone: companies.phone,
+    website: companies.website,
+    address: companies.address,
     otherData: companies.otherData,
     isDeleted: companies.isDeleted,
     isActive: companies.isActive,
