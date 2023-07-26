@@ -6,12 +6,15 @@ const createValidation = require('../../../../validation')(usersSchema.createSch
 
 const userRoleDb  = require('../../../../data-access/userRoleDb');
 const routeRoleDb = require('../../../../data-access/routeRoleDb');
+const roleDb = require('../../../../data-access/roleDb');
 
 const authController = require('./authController');
 
 const registerUsecase = require('../../../../use-case/authentication/register')({ 
   usersDb, 
   createValidation, 
+  roleDb,
+  userRoleDb,
 });
 const forgotPasswordUsecase = require('../../../../use-case/authentication/forgotPassword')({ usersDb });
 const resetPasswordUsecase = require('../../../../use-case/authentication/resetPassword')({ usersDb });

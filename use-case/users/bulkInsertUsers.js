@@ -3,6 +3,7 @@
  *bulkInsertUsers.js
  */
 
+const authConstant = require('../../constants/authConstant');
 const  usersEntity = require('../../entities/users');
 const response = require('../../utils/response');
 
@@ -14,9 +15,25 @@ const response = require('../../utils/response');
  * @return {Object} : created Userss. {status, message, data}
  */
 
-const bulkInsertUsers = ({ usersDb }) => async (dataToCreate,req,res) => {
+const bulkInsertUsers = ({
+  usersDb,roleDb,userRoleDb
+}) => async (dataToCreate,req,res) => {
   let usersEntities = dataToCreate.map(item => usersEntity(item));
   let createdUsers = await usersDb.create(usersEntities);
+  if (createdUsers && createdUsers.length) {
+    const defaultRole = await roleDb.findOne({ name: authConstant.DEFAULT_USER_ROLE });
+    let userRoleData = createdUsers.map(r => {
+      if (r.id) {
+        return {
+          userId: r.id,
+          roleId: defaultRole.id
+        };
+      }
+    });
+    if (userRoleData.length){
+      await userRoleDb.create(userRoleData);
+    }
+  }
   return response.success({ data:{ count:createdUsers.length || 0 } });
 };
 module.exports = bulkInsertUsers;
