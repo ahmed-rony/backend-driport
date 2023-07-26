@@ -14,6 +14,8 @@ const makeCheckUniqueFieldsInDatabase = require('../../utils/checkUniqueFieldsIn
 const register = ({ 
   usersDb, 
   createValidation,
+  roleDb,
+  userRoleDb,
 }) => async (params) => {
   let isEmptyPassword = false;
   if (!params.password){
@@ -35,6 +37,15 @@ const register = ({
   }
 
   const result = await usersDb.create(newUser);
+  if (result && result.id){
+    const defaultRole = await roleDb.findOne({ name: authConstant.DEFAULT_USER_ROLE });
+    if (defaultRole && defaultRole.id){
+      await userRoleDb.create({
+        userId: result.id,
+        roleId: defaultRole.id
+      });
+    }
+  }
   if (isEmptyPassword && params.mobileNo){
     await sendPasswordBySMS({
       mobileNo: params.mobileNo,

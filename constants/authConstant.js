@@ -20,9 +20,11 @@ const PLATFORM = {
 };
 
 let LOGIN_ACCESS = {
-  [USER_TYPES.User]:[PLATFORM.CLIENT],           
+  [USER_TYPES.User]:[PLATFORM.CLIENT,PLATFORM.ADMIN],           
   [USER_TYPES.Admin]:[PLATFORM.ADMIN,PLATFORM.CLIENT],           
 };
+
+const DEFAULT_USER_ROLE = 'User';
 
 const MAX_LOGIN_RETRY_LIMIT = 5;
 const LOGIN_REACTIVE_TIME = 5;
@@ -43,4 +45,5 @@ module.exports = {
   LOGIN_REACTIVE_TIME,
   FORGOT_PASSWORD_WITH,
   LOGIN_ACCESS,
+  DEFAULT_USER_ROLE,
 };

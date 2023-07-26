@@ -230,11 +230,6 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/companies/softdelete/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/admin/companies/softdelete/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -245,22 +240,12 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/companies/softdeletemany',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/admin/companies/softdeletemany',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/admin/companies/delete/:id',
         role: 'Admin',
-        method: 'DELETE'
-      },
-      {
-        route: '/admin/companies/delete/:id',
-        role: 'User',
         method: 'DELETE'
       },
       {
@@ -271,11 +256,6 @@ async function seedRouteRole () {
       {
         route: '/admin/companies/deletemany',
         role: 'Admin',
-        method: 'POST' 
-      },
-      {
-        route: '/admin/companies/deletemany',
-        role: 'User',
         method: 'POST' 
       },
       {
@@ -410,11 +390,6 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/conversations/softdelete/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/admin/conversations/softdelete/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -425,22 +400,12 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/conversations/softdeletemany',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/admin/conversations/softdeletemany',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/admin/conversations/delete/:id',
         role: 'Admin',
-        method: 'DELETE'
-      },
-      {
-        route: '/admin/conversations/delete/:id',
-        role: 'User',
         method: 'DELETE'
       },
       {
@@ -451,11 +416,6 @@ async function seedRouteRole () {
       {
         route: '/admin/conversations/deletemany',
         role: 'Admin',
-        method: 'POST'
-      },
-      {
-        route: '/admin/conversations/deletemany',
-        role: 'User',
         method: 'POST'
       },
       {
@@ -930,11 +890,6 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/users/softdelete/:id',
-        role: 'User',
-        method: 'PUT' 
-      },
-      {
-        route: '/admin/users/softdelete/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -945,22 +900,12 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/users/softdeletemany',
-        role: 'User',
-        method: 'PUT' 
-      },
-      {
-        route: '/admin/users/softdeletemany',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/admin/users/delete/:id',
         role: 'Admin',
-        method: 'DELETE' 
-      },
-      {
-        route: '/admin/users/delete/:id',
-        role: 'User',
         method: 'DELETE' 
       },
       {
@@ -971,11 +916,6 @@ async function seedRouteRole () {
       {
         route: '/admin/users/deletemany',
         role: 'Admin',
-        method: 'POST' 
-      },
-      {
-        route: '/admin/users/deletemany',
-        role: 'User',
         method: 'POST' 
       },
       {
@@ -1650,11 +1590,6 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/companies/softdelete/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/companies/softdelete/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -1665,22 +1600,12 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/companies/softdeletemany',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/companies/softdeletemany',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/client/api/v1/companies/delete/:id',
         role: 'Admin',
-        method: 'DELETE'
-      },
-      {
-        route: '/client/api/v1/companies/delete/:id',
-        role: 'User',
         method: 'DELETE'
       },
       {
@@ -1691,11 +1616,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/companies/deletemany',
         role: 'Admin',
-        method: 'POST'
-      },
-      {
-        route: '/client/api/v1/companies/deletemany',
-        role: 'User',
         method: 'POST'
       },
       {
@@ -1826,11 +1746,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/conversations/softdelete/:id',
         role: 'Admin',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/conversations/softdelete/:id',
-        role: 'User',
         method: 'PUT'
       },
       {
@@ -1841,11 +1756,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/conversations/softdeletemany',
         role: 'Admin',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/conversations/softdeletemany',
-        role: 'User',
         method: 'PUT'
       },
       {
@@ -1856,11 +1766,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/conversations/delete/:id',
         role: 'Admin',
-        method: 'DELETE'
-      },
-      {
-        route: '/client/api/v1/conversations/delete/:id',
-        role: 'User',
         method: 'DELETE'
       },
       {
@@ -1871,11 +1776,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/conversations/deletemany',
         role: 'Admin',
-        method: 'POST'
-      },
-      {
-        route: '/client/api/v1/conversations/deletemany',
-        role: 'User',
         method: 'POST'
       },
       {
@@ -2350,11 +2250,6 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/users/softdelete/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/users/softdelete/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -2365,22 +2260,12 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/users/softdeletemany',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/users/softdeletemany',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/client/api/v1/users/delete/:id',
         role: 'Admin',
-        method: 'DELETE'
-      },
-      {
-        route: '/client/api/v1/users/delete/:id',
-        role: 'User',
         method: 'DELETE'
       },
       {
@@ -2391,11 +2276,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/users/deletemany',
         role: 'Admin',
-        method: 'POST'
-      },
-      {
-        route: '/client/api/v1/users/deletemany',
-        role: 'User',
         method: 'POST'
       },
       {
