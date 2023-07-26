@@ -770,11 +770,6 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/reports/softdelete/:id',
-        role: 'User',
-        method: 'PUT' 
-      },
-      {
-        route: '/admin/reports/softdelete/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -785,22 +780,12 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/reports/softdeletemany',
-        role: 'User',
-        method: 'PUT' 
-      },
-      {
-        route: '/admin/reports/softdeletemany',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/admin/reports/delete/:id',
         role: 'Admin',
-        method: 'DELETE' 
-      },
-      {
-        route: '/admin/reports/delete/:id',
-        role: 'User',
         method: 'DELETE' 
       },
       {
@@ -811,11 +796,6 @@ async function seedRouteRole () {
       {
         route: '/admin/reports/deletemany',
         role: 'Admin',
-        method: 'POST' 
-      },
-      {
-        route: '/admin/reports/deletemany',
-        role: 'User',
         method: 'POST' 
       },
       {
@@ -2210,11 +2190,6 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/reports/softdelete/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/reports/softdelete/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -2225,22 +2200,12 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/reports/softdeletemany',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/reports/softdeletemany',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/client/api/v1/reports/delete/:id',
         role: 'Admin',
-        method: 'DELETE'
-      },
-      {
-        route: '/client/api/v1/reports/delete/:id',
-        role: 'User',
         method: 'DELETE'
       },
       {
@@ -2251,11 +2216,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/reports/deletemany',
         role: 'Admin',
-        method: 'POST'
-      },
-      {
-        route: '/client/api/v1/reports/deletemany',
-        role: 'User',
         method: 'POST'
       },
       {
