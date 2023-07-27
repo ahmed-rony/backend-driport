@@ -36,6 +36,10 @@ const schema = new Schema({
   updatedBy: {
     type:Schema.Types.ObjectId,
     ref:'users'
+  },
+  companyId: {
+    ref:'companies',
+    type:Schema.Types.ObjectId
   }
 }
 ,{ 

@@ -1,7 +1,7 @@
 const response = require('../../utils/response');
 
 const getDependencyCount = ({
-  companiesDb,reportsDb,vehiclesDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
 })=> async (filter) =>{
   let companies = await companiesDb.findMany(filter);
   if (companies.length){
@@ -13,11 +13,15 @@ const getDependencyCount = ({
     const vehiclesFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const vehiclesCnt =  await vehiclesDb.count(vehiclesFilter);
 
+    const driversFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
+    const driversCnt =  await driversDb.count(driversFilter);
+
     const usersFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const usersCnt =  await usersDb.count(usersFilter);
     let result = {
       reports :reportsCnt ,
       vehicles :vehiclesCnt ,
+      drivers :driversCnt ,
       users :usersCnt ,
     };
     return response.success({
@@ -33,7 +37,7 @@ const getDependencyCount = ({
 };
 
 const deleteWithDependency = ({
-  companiesDb,reportsDb,vehiclesDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
 })=> async (filter) =>{
   let companies = await companiesDb.findMany(filter);
   if (companies.length){
@@ -45,12 +49,16 @@ const deleteWithDependency = ({
     const vehiclesFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const vehiclesCnt =  (await vehiclesDb.deleteMany(vehiclesFilter));
 
+    const driversFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
+    const driversCnt =  (await driversDb.deleteMany(driversFilter));
+
     const usersFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const usersCnt =  (await usersDb.deleteMany(usersFilter));
     let deleted = (await companiesDb.deleteMany(filter));
     let result = {
       reports :reportsCnt ,
       vehicles :vehiclesCnt ,
+      drivers :driversCnt ,
       users :usersCnt ,
     };
     return response.success({
@@ -66,7 +74,7 @@ const deleteWithDependency = ({
 };
 
 const softDeleteWithDependency = ({
-  companiesDb,reportsDb,vehiclesDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
 }) => async (filter,updateBody) =>{
   let companies = await companiesDb.findMany(filter);
   if (companies.length){
@@ -78,12 +86,16 @@ const softDeleteWithDependency = ({
     const vehiclesFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const vehiclesCnt =  (await vehiclesDb.updateMany(vehiclesFilter,updateBody));
 
+    const driversFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
+    const driversCnt =  (await driversDb.updateMany(driversFilter,updateBody));
+
     const usersFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const usersCnt =  (await usersDb.updateMany(usersFilter,updateBody));
     let updated = (await companiesDb.updateMany(filter,updateBody));
     let result = {
       reports :reportsCnt ,
       vehicles :vehiclesCnt ,
+      drivers :driversCnt ,
       users :usersCnt ,
     };
     return response.success({

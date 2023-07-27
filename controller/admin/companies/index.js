@@ -1,6 +1,7 @@
 const companiesDb = require('../../../data-access/companiesDb');
 const reportsDb = require('../../../data-access/reportsDb');
 const vehiclesDb = require('../../../data-access/vehiclesDb');
+const driversDb = require('../../../data-access/driversDb');
 const usersDb = require('../../../data-access/usersDb');
 
 const companiesSchema = require('../../../validation/schema/companies');
@@ -35,24 +36,28 @@ const softDeleteCompaniesUsecase = require('../../../use-case/companies/softDele
   companiesDb,
   reportsDb,
   vehiclesDb,
+  driversDb,
   usersDb
 });
 const softDeleteManyCompaniesUsecase = require('../../../use-case/companies/softDeleteManyCompanies')({
   companiesDb,
   reportsDb,
   vehiclesDb,
+  driversDb,
   usersDb
 });
 const deleteCompaniesUsecase = require('../../../use-case/companies/deleteCompanies')({
   companiesDb,
   reportsDb,
   vehiclesDb,
+  driversDb,
   usersDb
 });
 const deleteManyCompaniesUsecase = require('../../../use-case/companies/deleteManyCompanies')({
   companiesDb,
   reportsDb,
   vehiclesDb,
+  driversDb,
   usersDb
 });
 
