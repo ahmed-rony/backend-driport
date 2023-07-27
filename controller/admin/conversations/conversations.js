@@ -5,6 +5,7 @@ const getSelectObject = require('../../../utils/getSelectObject');
 const addConversations = (addConversationsUsecase) => async (req,res) => {
   try {
     let dataToCreate = { ...req.body || {} };
+    dataToCreate.addedBy = req.user.id;
     let result = await addConversationsUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -15,6 +16,12 @@ const addConversations = (addConversationsUsecase) => async (req,res) => {
 const bulkInsertConversations = (bulkInsertConversationsUsecase)=> async (req,res) => {
   try {
     let dataToCreate = [...req.body.data];
+    for (let i = 0;i < dataToCreate.length;i++){
+      dataToCreate[i] = {
+        ...dataToCreate[i],
+        addedBy:req.user.id,
+      };
+    }
     let result = await bulkInsertConversationsUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -71,6 +78,8 @@ const updateConversations = (updateConversationsUsecase) => async (req,res) =>{
     }
     let dataToUpdate = { ...req.body || {} };
     let query = { _id: req.params.id };
+    delete dataToUpdate.addedBy;
+    dataToUpdate.updatedBy = req.user.id;
     let result = await updateConversationsUsecase({
       dataToUpdate,
       query
@@ -85,6 +94,8 @@ const bulkUpdateConversations = (bulkUpdateConversationsUsecase) => async (req,r
   try {
     let dataToUpdate = { ...req.body.data || {} };
     let query = { ...req.body.filter || {} };
+    delete dataToUpdate.addedBy;
+    dataToUpdate.updatedBy = req.user.id;
     let result = await bulkUpdateConversationsUsecase({
       dataToUpdate,
       query
@@ -102,6 +113,7 @@ const partialUpdateConversations = (partialUpdateConversationsUsecase) => async 
     }
     let query = { _id: req.params.id };
     let dataToUpdate = { ...req.body || {} };
+    dataToUpdate.updatedBy = req.user.id;
     let result = await partialUpdateConversationsUsecase({
       dataToUpdate,
       query
@@ -118,7 +130,10 @@ const softDeleteConversations = (softDeleteConversationsUsecase) => async (req,r
       return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! id is required.' }));
     }
     let query = { _id: req.params.id };
-    const dataToUpdate = { isDeleted: true, };
+    const dataToUpdate = {
+      isDeleted: true,
+      updatedBy: req.user.id,
+    };
     let result = await softDeleteConversationsUsecase({
       query,
       dataToUpdate,
@@ -170,7 +185,10 @@ const softDeleteManyConversations = (softDeleteManyConversationsUsecase) => asyn
     }
     let ids = req.body.ids;
     let query = { _id : { $in:ids } };
-    const dataToUpdate = { isDeleted: true, };
+    const dataToUpdate = {
+      isDeleted: true,
+      updatedBy: req.user.id,
+    };
     let result = await softDeleteManyConversationsUsecase({
       query,
       dataToUpdate,

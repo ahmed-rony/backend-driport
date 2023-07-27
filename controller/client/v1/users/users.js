@@ -5,17 +5,8 @@ const getSelectObject = require('../../../../utils/getSelectObject');
 const addUsers = (addUsersUsecase) => async (req,res) => {
   try {
     let dataToCreate = { ...req.body || {} };
+    dataToCreate.addedBy = req.user.id;
     let result = await addUsersUsecase(dataToCreate,req,res);
-    return responseHandler(res,result);
-  } catch (error){
-    return responseHandler(res,response.internalServerError({ message:error.message }));
-  }
-};
-
-const bulkInsertUsers = (bulkInsertUsersUsecase)=> async (req,res) => {
-  try {
-    let dataToCreate = [...req.body.data];
-    let result = await bulkInsertUsersUsecase(dataToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
     return responseHandler(res,response.internalServerError({ message:error.message }));
@@ -26,6 +17,10 @@ const findAllUsers = (findAllUsersUsecase) => async (req,res) => {
   try {
     let query = { ...req.body.query || {} };
     let options = { ...req.body.options || {} };
+    query._id = { $ne: req.user.id };
+    if (req.body && req.body.query && req.body.query._id) {
+      query._id.$in = [req.body.query._id];
+    }
     let result = await findAllUsersUsecase({
       query,
       options,
@@ -71,21 +66,10 @@ const updateUsers = (updateUsersUsecase) => async (req,res) =>{
     }
     let dataToUpdate = { ...req.body || {} };
     let query = { _id: req.params.id };
+    delete dataToUpdate.addedBy;
+    dataToUpdate.updatedBy = req.user.id;
+    query._id.$ne = req.user.id;
     let result = await updateUsersUsecase({
-      dataToUpdate,
-      query
-    },req,res);
-    return responseHandler(res,result);
-  } catch (error){
-    return responseHandler(res,response.internalServerError({ message:error.message }));
-  }
-};
-
-const bulkUpdateUsers = (bulkUpdateUsersUsecase) => async (req,res) => {
-  try {
-    let dataToUpdate = { ...req.body.data || {} };
-    let query = { ...req.body.filter || {} };
-    let result = await bulkUpdateUsersUsecase({
       dataToUpdate,
       query
     },req,res);
@@ -102,79 +86,11 @@ const partialUpdateUsers = (partialUpdateUsersUsecase) => async (req,res) => {
     }
     let query = { _id: req.params.id };
     let dataToUpdate = { ...req.body || {} };
+    dataToUpdate.updatedBy = req.user.id;
+    query._id.$ne = req.user.id;
     let result = await partialUpdateUsersUsecase({
       dataToUpdate,
       query
-    },req,res);
-    return responseHandler(res,result);
-  } catch (error){
-    return responseHandler(res,response.internalServerError({ message:error.message }));
-  }
-};
-
-const softDeleteUsers = (softDeleteUsersUsecase) => async (req,res) => {
-  try {
-    if (!req.params.id){
-      return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! id is required.' }));
-    }
-    let query = { _id: req.params.id };
-    const dataToUpdate = { isDeleted: true, };
-    let result = await softDeleteUsersUsecase({
-      query,
-      dataToUpdate,
-      isWarning:req.body.isWarning || false
-    },req,res);
-    return responseHandler(res,result);
-  } catch (error){
-    return responseHandler(res,response.internalServerError({ message:error.message }));
-  }
-};
-
-const deleteUsers = (deleteUsersUsecase) => async (req,res) => {
-  try {
-    if (!req.params.id){
-      return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! id is required.' }));
-    }
-    let query = { _id: req.params.id };
-    let result = await deleteUsersUsecase({
-      query,
-      isWarning:req.body.isWarning || false
-    },req,res);
-    return responseHandler(res,result);
-  } catch (error){
-    return responseHandler(res,response.internalServerError({ message:error.message }));
-  }
-};
-
-const deleteManyUsers = (deleteManyUsersUsecase) => async (req,res) => {
-  try {
-    if (!req.body || !req.body.ids){
-      return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! ids field is required.' }));
-    }
-    let ids = req.body.ids;
-    let query = { _id : { $in:ids } };
-    let result = await deleteManyUsersUsecase({
-      query,
-      isWarning:req.body.isWarning || false
-    },req,res);
-    return responseHandler(res,result);
-  } catch (error){
-    return responseHandler(res,response.internalServerError({ message:error.message }));
-  }
-};
-
-const softDeleteManyUsers = (softDeleteManyUsersUsecase) => async (req,res) => {
-  try {
-    if (!req.body || !req.body.ids){
-      return responseHandler(res,response.badRequest({ message : 'Insufficient request parameters! id is required.' }));
-    }
-    let ids = req.body.ids;
-    let query = { _id : { $in:ids } };
-    const dataToUpdate = { isDeleted: true, };
-    let result = await softDeleteManyUsersUsecase({
-      query,
-      dataToUpdate,
-      isWarning:req.body.isWarning || false
     },req,res);
     return responseHandler(res,result);
   } catch (error){
@@ -227,17 +143,11 @@ const getLoggedInUserInfo = (getUsersUsecase) => async (req,res) =>{
 
 module.exports = {
   addUsers,
-  bulkInsertUsers,
   findAllUsers,
   getUsers,
   getUsersCount,
   updateUsers,
-  bulkUpdateUsers,
   partialUpdateUsers,
-  softDeleteUsers,
-  deleteUsers,
-  deleteManyUsers,
-  softDeleteManyUsers,
   changePassword,
   updateProfile,
   getLoggedInUserInfo

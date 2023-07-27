@@ -14,7 +14,7 @@ const response = require('../../utils/response');
  * @return {Object} : number of deactivated documents. {status, message, data}
  */
 const softDeleteManyCompanies = ({
-  companiesDb,reportsDb,vehiclesDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
 }) => async (params,req,res) => {
   let {
     query, dataToUpdate,isWarning 
@@ -25,6 +25,7 @@ const softDeleteManyCompanies = ({
       companiesDb,
       reportsDb,
       vehiclesDb,
+      driversDb,
       usersDb
     });
     return await getDependencyCount(query);
@@ -33,6 +34,7 @@ const softDeleteManyCompanies = ({
       companiesDb,
       reportsDb,
       vehiclesDb,
+      driversDb,
       usersDb
     });
     return await softDeleteWithDependency(query, dataToUpdate);

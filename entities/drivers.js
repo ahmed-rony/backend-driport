@@ -13,6 +13,7 @@ module.exports = (drivers) => {
     updatedAt: drivers.updatedAt,
     addedBy: drivers.addedBy,
     updatedBy: drivers.updatedBy,
+    companyId: drivers.companyId,
   };
 
   // remove undefined values

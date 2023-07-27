@@ -11,7 +11,8 @@ const createSchema = joi.object({
   riskMatrix: joi.number().integer().allow(0),
   vehicleId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   isDeleted: joi.boolean(),
-  isActive: joi.boolean()
+  isActive: joi.boolean(),
+  companyId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow('')
 }).unknown(true);
 
 const updateSchema = joi.object({
@@ -23,6 +24,7 @@ const updateSchema = joi.object({
   vehicleId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   isDeleted: joi.boolean(),
   isActive: joi.boolean(),
+  companyId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   _id: joi.string().regex(/^[0-9a-fA-F]{24}$/)
 }
 ).unknown(true);
@@ -40,6 +42,7 @@ let filterValidationSchema = joi.object({
       vehicleId: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object()),
       isDeleted: joi.alternatives().try(joi.array().items(),joi.boolean(),joi.object()),
       isActive: joi.alternatives().try(joi.array().items(),joi.boolean(),joi.object()),
+      companyId: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object()),
       id: joi.any(),
       _id: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object())
     }
