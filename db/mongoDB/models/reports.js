@@ -31,7 +31,10 @@ const schema = new Schema({
   location: { type:String },
   riskMatrix: { type:Number },
   count: { type:Number },
-  driverId: { type:String },
+  driverId: {
+    type:Schema.Types.ObjectId,
+    ref:'drivers'
+  },
   vehicleId: {
     type:Schema.Types.ObjectId,
     ref:'vehicles'
