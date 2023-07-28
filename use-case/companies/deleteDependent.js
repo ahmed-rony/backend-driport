@@ -1,7 +1,7 @@
 const response = require('../../utils/response');
 
 const getDependencyCount = ({
-  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,conversationsDb,driversDb,usersDb
 })=> async (filter) =>{
   let companies = await companiesDb.findMany(filter);
   if (companies.length){
@@ -13,6 +13,9 @@ const getDependencyCount = ({
     const vehiclesFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const vehiclesCnt =  await vehiclesDb.count(vehiclesFilter);
 
+    const conversationsFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
+    const conversationsCnt =  await conversationsDb.count(conversationsFilter);
+
     const driversFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const driversCnt =  await driversDb.count(driversFilter);
 
@@ -21,6 +24,7 @@ const getDependencyCount = ({
     let result = {
       reports :reportsCnt ,
       vehicles :vehiclesCnt ,
+      conversations :conversationsCnt ,
       drivers :driversCnt ,
       users :usersCnt ,
     };
@@ -37,7 +41,7 @@ const getDependencyCount = ({
 };
 
 const deleteWithDependency = ({
-  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,conversationsDb,driversDb,usersDb
 })=> async (filter) =>{
   let companies = await companiesDb.findMany(filter);
   if (companies.length){
@@ -49,6 +53,9 @@ const deleteWithDependency = ({
     const vehiclesFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const vehiclesCnt =  (await vehiclesDb.deleteMany(vehiclesFilter));
 
+    const conversationsFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
+    const conversationsCnt =  (await conversationsDb.deleteMany(conversationsFilter));
+
     const driversFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const driversCnt =  (await driversDb.deleteMany(driversFilter));
 
@@ -58,6 +65,7 @@ const deleteWithDependency = ({
     let result = {
       reports :reportsCnt ,
       vehicles :vehiclesCnt ,
+      conversations :conversationsCnt ,
       drivers :driversCnt ,
       users :usersCnt ,
     };
@@ -74,7 +82,7 @@ const deleteWithDependency = ({
 };
 
 const softDeleteWithDependency = ({
-  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,conversationsDb,driversDb,usersDb
 }) => async (filter,updateBody) =>{
   let companies = await companiesDb.findMany(filter);
   if (companies.length){
@@ -86,6 +94,9 @@ const softDeleteWithDependency = ({
     const vehiclesFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const vehiclesCnt =  (await vehiclesDb.updateMany(vehiclesFilter,updateBody));
 
+    const conversationsFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
+    const conversationsCnt =  (await conversationsDb.updateMany(conversationsFilter,updateBody));
+
     const driversFilter = { '$or': [{ companyId : { '$in' : companiesIds } }] };
     const driversCnt =  (await driversDb.updateMany(driversFilter,updateBody));
 
@@ -95,6 +106,7 @@ const softDeleteWithDependency = ({
     let result = {
       reports :reportsCnt ,
       vehicles :vehiclesCnt ,
+      conversations :conversationsCnt ,
       drivers :driversCnt ,
       users :usersCnt ,
     };

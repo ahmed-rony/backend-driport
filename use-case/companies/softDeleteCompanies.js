@@ -14,7 +14,7 @@ const response = require('../../utils/response');
  * @return {Object} : deactivated Companies. {status, message, data}
  */
 const softDeleteCompanies = ({
-  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,conversationsDb,driversDb,usersDb
 }) => async (params,req,res) => {
   let {
     query, dataToUpdate,isWarning 
@@ -25,6 +25,7 @@ const softDeleteCompanies = ({
       companiesDb,
       reportsDb,
       vehiclesDb,
+      conversationsDb,
       driversDb,
       usersDb
     });
@@ -34,6 +35,7 @@ const softDeleteCompanies = ({
       companiesDb,
       reportsDb,
       vehiclesDb,
+      conversationsDb,
       driversDb,
       usersDb
     });

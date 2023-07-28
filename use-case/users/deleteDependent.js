@@ -13,7 +13,7 @@ const getDependencyCount = ({
     const vehiclesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };
     const vehiclesCnt =  await vehiclesDb.count(vehiclesFilter);
 
-    const companiesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };
+    const companiesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } },{ userId : { '$in' : usersIds } }] };
     const companiesCnt =  await companiesDb.count(companiesFilter);
 
     const conversationsFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };
@@ -77,7 +77,7 @@ const deleteWithDependency = ({
     const vehiclesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };
     const vehiclesCnt =  (await vehiclesDb.deleteMany(vehiclesFilter));
 
-    const companiesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };
+    const companiesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } },{ userId : { '$in' : usersIds } }] };
     const companiesCnt =  (await companiesDb.deleteMany(companiesFilter));
 
     const conversationsFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };
@@ -142,7 +142,7 @@ const softDeleteWithDependency = ({
     const vehiclesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };
     const vehiclesCnt =  (await vehiclesDb.updateMany(vehiclesFilter,updateBody));
 
-    const companiesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };
+    const companiesFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } },{ userId : { '$in' : usersIds } }] };
     const companiesCnt =  (await companiesDb.updateMany(companiesFilter,updateBody));
 
     const conversationsFilter = { '$or': [{ addedBy : { '$in' : usersIds } },{ updatedBy : { '$in' : usersIds } }] };

@@ -14,7 +14,7 @@ const response = require('../../utils/response');
  * @return {Object} : no of documents deleted. {status, message, data}
  */
 const deleteManyCompanies = ({
-  companiesDb,reportsDb,vehiclesDb,driversDb,usersDb
+  companiesDb,reportsDb,vehiclesDb,conversationsDb,driversDb,usersDb
 }) => async (params,req,res) => {
   let {
     query,isWarning 
@@ -25,6 +25,7 @@ const deleteManyCompanies = ({
       companiesDb,
       reportsDb,
       vehiclesDb,
+      conversationsDb,
       driversDb,
       usersDb
     });
@@ -34,6 +35,7 @@ const deleteManyCompanies = ({
       companiesDb,
       reportsDb,
       vehiclesDb,
+      conversationsDb,
       driversDb,
       usersDb
     });
