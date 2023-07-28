@@ -13,6 +13,7 @@ module.exports = (conversations) => {
     updatedAt: conversations.updatedAt,
     addedBy: conversations.addedBy,
     updatedBy: conversations.updatedBy,
+    companyId: conversations.companyId,
   };
 
   // remove undefined values

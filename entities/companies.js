@@ -14,6 +14,7 @@ module.exports = (companies) => {
     updatedAt: companies.updatedAt,
     addedBy: companies.addedBy,
     updatedBy: companies.updatedBy,
+    userId: companies.userId,
   };
 
   // remove undefined values

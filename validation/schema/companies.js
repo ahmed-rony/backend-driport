@@ -12,7 +12,8 @@ const createSchema = joi.object({
   address: joi.string().allow(null).allow(''),
   otherData: joi.string().allow(null).allow(''),
   isDeleted: joi.boolean(),
-  isActive: joi.boolean()
+  isActive: joi.boolean(),
+  userId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow('')
 }).unknown(true);
 
 const updateSchema = joi.object({
@@ -25,6 +26,7 @@ const updateSchema = joi.object({
   otherData: joi.string().allow(null).allow(''),
   isDeleted: joi.boolean(),
   isActive: joi.boolean(),
+  userId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   _id: joi.string().regex(/^[0-9a-fA-F]{24}$/)
 }
 ).unknown(true);
@@ -43,6 +45,7 @@ let filterValidationSchema = joi.object({
       otherData: joi.alternatives().try(joi.array().items(),joi.string(),joi.object()),
       isDeleted: joi.alternatives().try(joi.array().items(),joi.boolean(),joi.object()),
       isActive: joi.alternatives().try(joi.array().items(),joi.boolean(),joi.object()),
+      userId: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object()),
       id: joi.any(),
       _id: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object())
     }
