@@ -270,11 +270,6 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/conversations/create',
-        role: 'User',
-        method: 'POST' 
-      },
-      {
-        route: '/admin/conversations/create',
         role: 'System_User',
         method: 'POST'
       },
@@ -282,11 +277,6 @@ async function seedRouteRole () {
         route: '/admin/conversations/addbulk',
         role: 'Admin',
         method: 'POST'
-      },
-      {
-        route: '/admin/conversations/addbulk',
-        role: 'User',
-        method: 'POST' 
       },
       {
         route: '/admin/conversations/addbulk',
@@ -345,11 +335,6 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/conversations/update/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/admin/conversations/update/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -360,22 +345,12 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/conversations/partial-update/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/admin/conversations/partial-update/:id',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/admin/conversations/updatebulk',
         role: 'Admin',
-        method: 'PUT'
-      },
-      {
-        route: '/admin/conversations/updatebulk',
-        role: 'User',
         method: 'PUT'
       },
       {
@@ -610,22 +585,12 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/reports/create',
-        role: 'User',
-        method: 'POST' 
-      },
-      {
-        route: '/admin/reports/create',
         role: 'System_User',
         method: 'POST' 
       },
       {
         route: '/admin/reports/addbulk',
         role: 'Admin',
-        method: 'POST' 
-      },
-      {
-        route: '/admin/reports/addbulk',
-        role: 'User',
         method: 'POST' 
       },
       {
@@ -685,11 +650,6 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/reports/update/:id',
-        role: 'User',
-        method: 'PUT' 
-      },
-      {
-        route: '/admin/reports/update/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -700,22 +660,12 @@ async function seedRouteRole () {
       },
       {
         route: '/admin/reports/partial-update/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/admin/reports/partial-update/:id',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/admin/reports/updatebulk',
         role: 'Admin',
-        method: 'PUT' 
-      },
-      {
-        route: '/admin/reports/updatebulk',
-        role: 'User',
         method: 'PUT' 
       },
       {
@@ -1630,22 +1580,12 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/conversations/create',
-        role: 'User',
-        method: 'POST'
-      },
-      {
-        route: '/client/api/v1/conversations/create',
         role: 'System_User',
         method: 'POST'
       },
       {
         route: '/client/api/v1/conversations/addbulk',
         role: 'Admin',
-        method: 'POST'
-      },
-      {
-        route: '/client/api/v1/conversations/addbulk',
-        role: 'User',
         method: 'POST'
       },
       {
@@ -1701,11 +1641,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/conversations/update/:id',
         role: 'Admin',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/conversations/update/:id',
-        role: 'User',
         method: 'PUT'
       },
       {
@@ -1716,11 +1651,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/conversations/partial-update/:id',
         role: 'Admin',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/conversations/partial-update/:id',
-        role: 'User',
         method: 'PUT'
       },
       {
@@ -1731,11 +1661,6 @@ async function seedRouteRole () {
       {
         route: '/client/api/v1/conversations/updatebulk',
         role: 'Admin',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/conversations/updatebulk',
-        role: 'User',
         method: 'PUT'
       },
       {
@@ -1970,22 +1895,12 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/reports/create',
-        role: 'User',
-        method: 'POST'
-      },
-      {
-        route: '/client/api/v1/reports/create',
         role: 'System_User',
         method: 'POST'
       },
       {
         route: '/client/api/v1/reports/addbulk',
         role: 'Admin',
-        method: 'POST'
-      },
-      {
-        route: '/client/api/v1/reports/addbulk',
-        role: 'User',
         method: 'POST'
       },
       {
@@ -2045,11 +1960,6 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/reports/update/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/reports/update/:id',
         role: 'System_User',
         method: 'PUT'
       },
@@ -2060,22 +1970,12 @@ async function seedRouteRole () {
       },
       {
         route: '/client/api/v1/reports/partial-update/:id',
-        role: 'User',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/reports/partial-update/:id',
         role: 'System_User',
         method: 'PUT'
       },
       {
         route: '/client/api/v1/reports/updatebulk',
         role: 'Admin',
-        method: 'PUT'
-      },
-      {
-        route: '/client/api/v1/reports/updatebulk',
-        role: 'User',
         method: 'PUT'
       },
       {

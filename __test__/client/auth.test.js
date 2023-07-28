@@ -27,30 +27,30 @@ beforeAll(async function (){
     const dbInstance = client.db('Dhiwise_test');
     const companies = dbInstance.collection('companies');
     insertedCompanies = await companies.insertOne({
-      companyName: 'relationships',
-      registrationNumber: 'Fish',
-      email: 'Mariane.Brakus47@gmail.com',
-      phone: '(577) 831-8849',
-      website: 'Dynamic',
-      address: '431 Leann Plaza',
-      otherData: 'Singapore',
-      userId: '64c312defdb0dc07dd7fe2b7',
-      id: '64c312defdb0dc07dd7fe2b8'
+      companyName: 'Checking',
+      registrationNumber: 'Grocery',
+      email: 'Jane_Dickinson12@hotmail.com',
+      phone: '(361) 105-4394',
+      website: '1080p',
+      address: '181 Dooley Gardens',
+      otherData: 'Programmable',
+      userId: '64c313ba4daccb081eed7322',
+      id: '64c313ba4daccb081eed7323'
     });
     const users = dbInstance.collection('users');
     insertedUsers = await users.insertOne({
-      name: 'Doug Mertz',
-      email: 'Ebony_Rowe@gmail.com',
-      password: 'aBdYm6hkX0UMYzp',
-      role: 'Wooden',
-      companyId: '64c312defdb0dc07dd7fe2be',
-      userType: 470,
-      mobileNo: '(502) 525-9249',
-      username: 'Priscilla_Beahan90',
+      name: 'Jimmie Rolfson',
+      email: 'Hallie_Marquardt@yahoo.com',
+      password: 'cARXj1fSQrruFTo',
+      role: 'Communications',
+      companyId: '64c313ba4daccb081eed7329',
+      userType: 536,
+      mobileNo: '(264) 836-3888',
+      username: 'Vilma.Shields',
       resetPasswordLink: {},
-      loginRetryLimit: 449,
-      loginReactiveTime: '2024-03-06T19:47:07.357Z',
-      id: '64c312defdb0dc07dd7fe2bf'
+      loginRetryLimit: 947,
+      loginReactiveTime: '2024-05-12T02:25:06.685Z',
+      id: '64c313ba4daccb081eed732a'
     });
   }
   catch (error) {
@@ -68,13 +68,13 @@ describe('POST /register -> if email and username is given', () => {
     let registeredUser = await request(app)
       .post('/client/auth/register')
       .send({
-        'name':'Mrs. Russell Beatty',
-        'email':'Lauretta.Davis@gmail.com',
-        'password':'ni2DirpR4WT2CbX',
+        'name':'Sylvia Orn IV',
+        'email':'Idella_Morissette@gmail.com',
+        'password':'nBqaKu7BPcSADwY',
         'companyId':insertedCompanies.insertedId,
         'userType':authConstant.USER_TYPES.User,
-        'mobileNo':'(499) 979-7004',
-        'username':'Grayson_Borer',
+        'mobileNo':'(764) 180-7322',
+        'username':'Annamae57',
         'addedBy':insertedUsers.insertedId,
         'updatedBy':insertedUsers.insertedId
       });
@@ -91,8 +91,8 @@ describe('POST /login -> if username and password is correct', () => {
       .post('/client/auth/login')
       .send(
         {
-          username: 'Grayson_Borer',
-          password: 'ni2DirpR4WT2CbX'
+          username: 'Annamae57',
+          password: 'nBqaKu7BPcSADwY'
         }
       );
       
@@ -112,7 +112,7 @@ describe('POST /login -> if username is incorrect', () => {
       .send(
         {
           username: 'wrong.username',
-          password: 'ni2DirpR4WT2CbX'
+          password: 'nBqaKu7BPcSADwY'
         }
       );
 
@@ -127,7 +127,7 @@ describe('POST /login -> if password is incorrect', () => {
       .post('/client/auth/login')
       .send(
         {
-          username: 'Grayson_Borer',
+          username: 'Annamae57',
           password: 'wrong@password'
         }
       );
@@ -174,7 +174,7 @@ describe('POST /forgot-password -> if email passed from request body is valid an
   test('should return success message', async () => {
     let users = await request(app)
       .post('/client/auth/forgot-password')
-      .send({ 'email':'Lauretta.Davis@gmail.com', });
+      .send({ 'email':'Idella_Morissette@gmail.com', });
 
     expect(users.statusCode).toBe(200);
     expect(users.body.status).toBe('SUCCESS');
@@ -187,8 +187,8 @@ describe('POST /validate-otp -> OTP is sent in request body and OTP is correct',
       .post('/client/auth/login')
       .send(
         {
-          username: 'Grayson_Borer',
-          password: 'ni2DirpR4WT2CbX'
+          username: 'Annamae57',
+          password: 'nBqaKu7BPcSADwY'
         }).then(login => () => {
         return request(app)
           .get(`/client/api/v1/users/${login.body.data.id}`)
@@ -235,8 +235,8 @@ describe('PUT /reset-password -> code is sent in request body and code is correc
       .post('/client/auth/login')
       .send(
         {
-          username: 'Grayson_Borer',
-          password: 'ni2DirpR4WT2CbX'
+          username: 'Annamae57',
+          password: 'nBqaKu7BPcSADwY'
         }).then(login => () => {
         return request(app)
           .get(`/client/api/v1/users/${login.body.data.id}`)
