@@ -14,7 +14,7 @@ const response = require('../../utils/response');
  * @return {Object} : deactivated Drivers. {status, message, data}
  */
 const softDeleteDrivers = ({
-  driversDb,vehiclesDb
+  driversDb,reportsDb,vehiclesDb
 }) => async (params,req,res) => {
   let {
     query, dataToUpdate,isWarning 
@@ -23,12 +23,14 @@ const softDeleteDrivers = ({
   if (isWarning) {
     const getDependencyCount = makeGetDependencyCount({
       driversDb,
+      reportsDb,
       vehiclesDb
     });
     return await getDependencyCount(query);
   } else {
     const softDeleteWithDependency = makeSoftDeleteWithDependency({
       driversDb,
+      reportsDb,
       vehiclesDb
     });
     return await softDeleteWithDependency(query, dataToUpdate);

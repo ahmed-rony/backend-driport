@@ -1,4 +1,5 @@
 const driversDb = require('../../../../data-access/driversDb');
+const reportsDb = require('../../../../data-access/reportsDb');
 const vehiclesDb = require('../../../../data-access/vehiclesDb');
 
 const driversSchema = require('../../../../validation/schema/drivers');
@@ -31,18 +32,22 @@ const partialUpdateDriversUsecase = require('../../../../use-case/drivers/partia
 const bulkUpdateDriversUsecase = require('../../../../use-case/drivers/bulkUpdateDrivers')({ driversDb });
 const softDeleteDriversUsecase = require('../../../../use-case/drivers/softDeleteDrivers')({
   driversDb,
+  reportsDb,
   vehiclesDb
 });
 const softDeleteManyDriversUsecase = require('../../../../use-case/drivers/softDeleteManyDrivers')({
   driversDb,
+  reportsDb,
   vehiclesDb
 });
 const deleteDriversUsecase = require('../../../../use-case/drivers/deleteDrivers')({
   driversDb,
+  reportsDb,
   vehiclesDb
 });
 const deleteManyDriversUsecase = require('../../../../use-case/drivers/deleteManyDrivers')({
   driversDb,
+  reportsDb,
   vehiclesDb
 });
 
