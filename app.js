@@ -10,12 +10,16 @@ const swaggerUi = require('swagger-ui-express');
 const listEndpoints = require('express-list-endpoints');
 let logger = require('morgan');
 const passport = require('passport');
+const stripeRoute = require('./routes/client/v1/stripe');
 
 const { clientPassportStrategy } = require('./middleware');
 const { adminPassportStrategy } = require('./middleware');
 
 const app = express();
-const corsOptions = { origin: process.env.ALLOW_ORIGIN, };
+const corsOptions = {
+  origin: process.env.ALLOW_ORIGIN,
+  credentials: true
+};
 app.use(cors(corsOptions));
 
 //template engine
@@ -34,6 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
+app.use('/client/api/v1/', stripeRoute);
 
 //swagger Documentation
 postmanToOpenApi('postman/postman-collection.json', path.join('postman/swagger.yml'), { defaultTag: 'General' }).then(data => {

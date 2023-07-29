@@ -19,11 +19,22 @@ const modelCustomLabels = {
 };
 mongoosePaginate.paginate.options = { customLabels: modelCustomLabels };
 const Schema = mongoose.Schema;
+
+const pricePlanSchema = new Schema({
+  id: { type: Number },
+  title: { type: String },
+  subtitle: { type: String },
+  perMonth: { type: Number },
+  perDay: { type: Number },
+});
+
 const schema = new Schema({
   name: { type:String },
   email: { type:String },
   password: { type:String },
   role: { type:String },
+  pricePlan: { type: pricePlanSchema },
+  transactionId: { type:String },
   createdAt: { type:Date },
   updatedAt: { type:Date },
   companyId: {
