@@ -28,7 +28,7 @@ const schema = new Schema({
   evidenceID: { type:String },
   plate: { type:String },
   date: { type:Date },
-  location: { type:String },
+  location: { type:Array },
   riskMatrix: { type:Number },
   count: { type:Number },
   driverId: {
@@ -54,7 +54,8 @@ const schema = new Schema({
   updatedBy: {
     type:Schema.Types.ObjectId,
     ref:'users'
-  }
+  },
+  address: { type:String }
 }
 ,{ 
   timestamps: { 

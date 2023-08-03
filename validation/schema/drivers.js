@@ -12,7 +12,9 @@ const createSchema = joi.object({
   vehicleId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   isDeleted: joi.boolean(),
   isActive: joi.boolean(),
-  companyId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow('')
+  companyId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
+  birthDate: joi.date().options({ convert: true }).allow(null).allow(''),
+  licenseExpiration: joi.date().options({ convert: true }).allow(null).allow('')
 }).unknown(true);
 
 const updateSchema = joi.object({
@@ -25,6 +27,8 @@ const updateSchema = joi.object({
   isDeleted: joi.boolean(),
   isActive: joi.boolean(),
   companyId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
+  birthDate: joi.date().options({ convert: true }).allow(null).allow(''),
+  licenseExpiration: joi.date().options({ convert: true }).allow(null).allow(''),
   _id: joi.string().regex(/^[0-9a-fA-F]{24}$/)
 }
 ).unknown(true);
@@ -43,6 +47,8 @@ let filterValidationSchema = joi.object({
       isDeleted: joi.alternatives().try(joi.array().items(),joi.boolean(),joi.object()),
       isActive: joi.alternatives().try(joi.array().items(),joi.boolean(),joi.object()),
       companyId: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object()),
+      birthDate: joi.alternatives().try(joi.array().items(),joi.date().options({ convert: true }),joi.object()),
+      licenseExpiration: joi.alternatives().try(joi.array().items(),joi.date().options({ convert: true }),joi.object()),
       id: joi.any(),
       _id: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object())
     }

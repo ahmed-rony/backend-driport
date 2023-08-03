@@ -1,6 +1,6 @@
 {
-  "id": "931c1b29-a350-4762-ba1b-108399db68d7",
-  "name": "driport_bakckend_environment",
+  "id": "92989223-88a2-4858-9d1f-6546e2e6e60b",
+  "name": "driport_backend_environment",
   "values": [
     {
       "key": "token",
@@ -14,6 +14,6 @@
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2023-07-28T01:15:02.571Z",
+  "_postman_exported_at": "2023-08-03T00:09:47.665Z",
   "_postman_exported_using": "Postman"
 }

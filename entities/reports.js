@@ -22,6 +22,7 @@ module.exports = (reports) => {
     updatedAt: reports.updatedAt,
     addedBy: reports.addedBy,
     updatedBy: reports.updatedBy,
+    address: reports.address,
   };
 
   // remove undefined values
