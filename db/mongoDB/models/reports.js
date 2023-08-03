@@ -23,7 +23,7 @@ const schema = new Schema({
   profileName: { type:String },
   userPhone: { type:String },
   description: { type:String },
-  reportType: { type:Number },
+  reportType: { type:String },
   media: { type:String },
   evidenceID: { type:String },
   plate: { type:String },
