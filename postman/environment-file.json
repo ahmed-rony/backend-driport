@@ -1,5 +1,5 @@
 {
-  "id": "92989223-88a2-4858-9d1f-6546e2e6e60b",
+  "id": "676b4165-32d4-4daf-9244-83b37325d9b5",
   "name": "driport_backend_environment",
   "values": [
     {
@@ -14,6 +14,6 @@
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2023-08-03T00:09:47.665Z",
+  "_postman_exported_at": "2023-08-03T00:25:39.945Z",
   "_postman_exported_using": "Postman"
 }
