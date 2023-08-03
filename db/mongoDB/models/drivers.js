@@ -40,7 +40,9 @@ const schema = new Schema({
   companyId: {
     ref:'companies',
     type:Schema.Types.ObjectId
-  }
+  },
+  birthDate: { type:Date },
+  licenseExpiration: { type:Date }
 }
 ,{ 
   timestamps: { 

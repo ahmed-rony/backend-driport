@@ -13,14 +13,15 @@ const createSchema = joi.object({
   evidenceID: joi.string().allow(null).allow(''),
   plate: joi.string().allow(null).allow(''),
   date: joi.date().options({ convert: true }).allow(null).allow(''),
-  location: joi.string().allow(null).allow(''),
+  location: joi.array().items(),
   riskMatrix: joi.number().integer().allow(0),
   count: joi.number().integer().allow(0),
   driverId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   vehicleId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   companyId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   isDeleted: joi.boolean(),
-  isActive: joi.boolean()
+  isActive: joi.boolean(),
+  address: joi.string().allow(null).allow('')
 }).unknown(true);
 
 const updateSchema = joi.object({
@@ -33,7 +34,7 @@ const updateSchema = joi.object({
   evidenceID: joi.string().allow(null).allow(''),
   plate: joi.string().allow(null).allow(''),
   date: joi.date().options({ convert: true }).allow(null).allow(''),
-  location: joi.string().allow(null).allow(''),
+  location: joi.array().items(),
   riskMatrix: joi.number().integer().allow(0),
   count: joi.number().integer().allow(0),
   driverId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
@@ -41,6 +42,7 @@ const updateSchema = joi.object({
   companyId: joi.string().regex(/^[0-9a-fA-F]{24}$/).allow(null).allow(''),
   isDeleted: joi.boolean(),
   isActive: joi.boolean(),
+  address: joi.string().allow(null).allow(''),
   _id: joi.string().regex(/^[0-9a-fA-F]{24}$/)
 }
 ).unknown(true);
@@ -59,7 +61,7 @@ let filterValidationSchema = joi.object({
       evidenceID: joi.alternatives().try(joi.array().items(),joi.string(),joi.object()),
       plate: joi.alternatives().try(joi.array().items(),joi.string(),joi.object()),
       date: joi.alternatives().try(joi.array().items(),joi.date().options({ convert: true }),joi.object()),
-      location: joi.alternatives().try(joi.array().items(),joi.string(),joi.object()),
+      location: joi.alternatives().try(joi.array().items(),joi.array().items(),joi.object()),
       riskMatrix: joi.alternatives().try(joi.array().items(),joi.number().integer(),joi.object()),
       count: joi.alternatives().try(joi.array().items(),joi.number().integer(),joi.object()),
       driverId: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object()),
@@ -67,6 +69,7 @@ let filterValidationSchema = joi.object({
       companyId: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object()),
       isDeleted: joi.alternatives().try(joi.array().items(),joi.boolean(),joi.object()),
       isActive: joi.alternatives().try(joi.array().items(),joi.boolean(),joi.object()),
+      address: joi.alternatives().try(joi.array().items(),joi.string(),joi.object()),
       id: joi.any(),
       _id: joi.alternatives().try(joi.array().items(),joi.string().regex(/^[0-9a-fA-F]{24}$/),joi.object())
     }
