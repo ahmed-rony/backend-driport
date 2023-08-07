@@ -7,6 +7,7 @@ let {
   deleteMany,
   findOne,
   findMany,
+  getTopVehiclesWithMostReports,
   count,
   paginate,
 } = require('../db/mongoDB/dbService')(Reports);
@@ -19,6 +20,7 @@ module.exports = {
   deleteMany,
   findOne,
   findMany,
+  getTopVehiclesWithMostReports,
   count,
   paginate,
 };
