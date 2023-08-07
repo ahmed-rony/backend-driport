@@ -8,6 +8,7 @@ const { PLATFORM } =  require('../../../constants/authConstant');
 
 router.route('/client/api/v1/drivers/create').post(auth(PLATFORM.CLIENT),checkRolePermission,driversController.addDrivers);
 router.route('/client/api/v1/drivers/addBulk').post(auth(PLATFORM.CLIENT),checkRolePermission,driversController.bulkInsertDrivers);
+router.route('/client/api/v1/drivers/most').post(auth(PLATFORM.CLIENT),checkRolePermission,driversController.getMostDriver);
 router.route('/client/api/v1/drivers/list').post(auth(PLATFORM.CLIENT),checkRolePermission,driversController.findAllDrivers);
 router.route('/client/api/v1/drivers/count').post(auth(PLATFORM.CLIENT),checkRolePermission,driversController.getDriversCount);
 router.route('/client/api/v1/drivers/:id').get(auth(PLATFORM.CLIENT),checkRolePermission,driversController.getDriversById);

@@ -55,6 +55,15 @@ const mongoDbService = (Model) => {
     });
   });
 
+  const findManyWithLimit = (filter, options, limit) => new Promise((resolve, reject) => {
+    Model.find(filter, null, options)
+      .limit(limit) // Aplicar el límite de 10 usuarios aquí
+      .exec((error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      });
+  });
+  
   // count documents
   const count = (filter) => new Promise((resolve, reject) => {
     Model.countDocuments(filter, (error, result) => {
@@ -70,6 +79,12 @@ const mongoDbService = (Model) => {
       else resolve(result);
     });
   });
+  const getTopVehiclesWithMostReports = (aggregate) => new Promise((resolve, reject) => {
+    Model.aggregate(aggregate, (error, result) => {
+      if (error) reject(error);
+      else resolve(result);
+    });
+  });
 
   return Object.freeze({
     create,
@@ -79,8 +94,10 @@ const mongoDbService = (Model) => {
     deleteMany,
     findOne,
     findMany,
+    findManyWithLimit,
     count,
     paginate,
+    getTopVehiclesWithMostReports,
   });
 };
 

@@ -71,6 +71,43 @@ const getVehiclesCount = (getVehiclesCountUsecase) => async (req,res) => {
   }
 };
 
+const getTopVehicles = (getVehiclesCountUsecase) => async (req,res) => {
+  try {
+    let aggregate = [
+      {
+        $group: {
+          _id: '$vehicleId',
+          totalReports: { $sum: 1 },
+        },
+      },
+      { $sort: { totalReports: -1 }, },
+      { $limit: 10, },
+      {
+        $lookup: {
+          from: 'vehicles',
+          localField: '_id', // Ajusta este campo si es diferente al campo "_id"
+          foreignField: '_id',
+          as: 'vehicleData',
+        },
+      },
+      { $unwind: '$vehicleData', },
+      {
+        $project: {
+          vehicleId: '$vehicleData._id',
+          brand: '$vehicleData.brand',
+          model: '$vehicleData.model',
+          totalReports: 1,
+        },
+      },
+    ];
+    let result = await getVehiclesCountUsecase({ aggregate },req,res);  
+    return responseHandler(res,result);
+  } catch (error){
+    console.log(error);
+    return responseHandler(res,response.internalServerError({ message:error.message }));
+  }
+};
+
 const updateVehicles = (updateVehiclesUsecase) => async (req,res) =>{
   try {
     if (!req.params.id){
@@ -206,6 +243,7 @@ module.exports = {
   findAllVehicles,
   getVehicles,
   getVehiclesCount,
+  getTopVehicles,
   updateVehicles,
   bulkUpdateVehicles,
   partialUpdateVehicles,

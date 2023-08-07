@@ -24,6 +24,10 @@ const getVehiclesUsecase = require('../../../../use-case/vehicles/getVehicles')(
   vehiclesDb,
   filterValidation
 });
+const getTopVehiclesUseCase = require('../../../../use-case/vehicles/getTopVehicles')({
+  reportsDb,
+  filterValidation
+});
 const updateVehiclesUsecase = require('../../../../use-case/vehicles/updateVehicles')({
   vehiclesDb,
   updateValidation 
@@ -57,6 +61,7 @@ const addVehicles = vehiclesController.addVehicles(addVehiclesUsecase);
 const bulkInsertVehicles = vehiclesController.bulkInsertVehicles(bulkInsertVehiclesUsecase);
 const findAllVehicles = vehiclesController.findAllVehicles(findAllVehiclesUsecase);
 const getVehiclesCount = vehiclesController.getVehiclesCount(getVehiclesCountUsecase);
+const getTopVehicles = vehiclesController.getTopVehicles(getTopVehiclesUseCase);
 const getVehiclesById = vehiclesController.getVehicles(getVehiclesUsecase);
 const updateVehicles = vehiclesController.updateVehicles(updateVehiclesUsecase);
 const partialUpdateVehicles = vehiclesController.partialUpdateVehicles(partialUpdateVehiclesUsecase);
@@ -72,6 +77,7 @@ module.exports = {
   findAllVehicles,
   getVehiclesCount,
   getVehiclesById,
+  getTopVehicles,
   updateVehicles,
   partialUpdateVehicles,
   bulkUpdateVehicles,

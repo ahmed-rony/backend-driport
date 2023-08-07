@@ -7,6 +7,7 @@ let {
   deleteMany,
   findOne,
   findMany,
+  findManyWithLimit,
   count,
   paginate,
 } = require('../db/mongoDB/dbService')(Drivers);
@@ -19,6 +20,7 @@ module.exports = {
   deleteMany,
   findOne,
   findMany,
+  findManyWithLimit,
   count,
   paginate,
 };

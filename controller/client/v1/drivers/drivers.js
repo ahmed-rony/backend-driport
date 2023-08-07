@@ -61,6 +61,25 @@ const getDrivers = (getDriversUsecase) => async (req,res) =>{
   }
 };
 
+const getMostDriver = (getDriversUsecase) => async (req,res) => {
+  try {
+    let query = {};
+    let options = { sort: { riskMatrix : -1 } };
+    let limit = 10;
+    
+    let result = await getDriversUsecase({
+      query,
+      options,
+      limit
+    },req,res);
+    return responseHandler(res,result);
+
+  } catch (error) {    
+    console.log(error);
+    return responseHandler(res,response.internalServerError({ message:error.message }));
+  }
+};
+
 const getDriversCount = (getDriversCountUsecase) => async (req,res) => {
   try {
     let where = { ...req.body.where || {} };
@@ -205,6 +224,7 @@ module.exports = {
   bulkInsertDrivers,
   findAllDrivers,
   getDrivers,
+  getMostDriver,
   getDriversCount,
   updateDrivers,
   bulkUpdateDrivers,

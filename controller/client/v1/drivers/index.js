@@ -24,6 +24,10 @@ const getDriversUsecase = require('../../../../use-case/drivers/getDrivers')({
   driversDb,
   filterValidation
 });
+const getMostDriverUsecase = require('../../../../use-case/drivers/getMostDrivers')({
+  driversDb,
+  filterValidation
+});
 const updateDriversUsecase = require('../../../../use-case/drivers/updateDrivers')({
   driversDb,
   updateValidation 
@@ -46,7 +50,7 @@ const deleteDriversUsecase = require('../../../../use-case/drivers/deleteDrivers
   vehiclesDb
 });
 const deleteManyDriversUsecase = require('../../../../use-case/drivers/deleteManyDrivers')({
-  driversDb,
+  driversDb, 
   reportsDb,
   vehiclesDb
 });
@@ -58,6 +62,7 @@ const bulkInsertDrivers = driversController.bulkInsertDrivers(bulkInsertDriversU
 const findAllDrivers = driversController.findAllDrivers(findAllDriversUsecase);
 const getDriversCount = driversController.getDriversCount(getDriversCountUsecase);
 const getDriversById = driversController.getDrivers(getDriversUsecase);
+const getMostDriver = driversController.getMostDriver(getMostDriverUsecase);
 const updateDrivers = driversController.updateDrivers(updateDriversUsecase);
 const partialUpdateDrivers = driversController.partialUpdateDrivers(partialUpdateDriversUsecase);
 const bulkUpdateDrivers = driversController.bulkUpdateDrivers(bulkUpdateDriversUsecase);
@@ -72,6 +77,7 @@ module.exports = {
   findAllDrivers,
   getDriversCount,
   getDriversById,
+  getMostDriver,
   updateDrivers,
   partialUpdateDrivers,
   bulkUpdateDrivers,

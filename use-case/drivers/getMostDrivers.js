@@ -11,20 +11,23 @@ const response = require('../../utils/response');
  * @param {Object} res : The res object represents HTTP response.
  * @return {Object} : found Drivers. {status, message, data}
  */
-const getDrivers = ({ 
+const getMostDrivers = ({ 
   driversDb, filterValidation 
 }) => async (params,req,res) => {
   let {
-    query, options  
+    query, options, limit  
   } = params;
+
   const validateRequest = await filterValidation(options);
   if (!validateRequest.isValid) {
     return response.validationError({ message : `Invalid values in parameters, ${validateRequest.message}` });
   }
-  let foundDrivers = await driversDb.findMany(query, options);
+  
+  let foundDrivers = await driversDb.findManyWithLimit(query,options, limit);
+  
   if (!foundDrivers){
     return response.recordNotFound();
   }
   return response.success({ data:foundDrivers });
 };
-module.exports = getDrivers;
+module.exports = getMostDrivers;
