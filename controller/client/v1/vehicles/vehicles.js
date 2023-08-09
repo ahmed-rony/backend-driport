@@ -76,7 +76,7 @@ const getTopVehicles = (getVehiclesCountUsecase) => async (req,res) => {
     let aggregate = [
       {
         $group: {
-          _id: '$vehicleId',
+          _id: '$vehicle._id',
           totalReports: { $sum: 1 },
         },
       },
