@@ -16,54 +16,55 @@ const modelCustomLabels = {
 mongoosePaginate.paginate.options = { customLabels: modelCustomLabels };
 const Schema = mongoose.Schema;
 const schema = new Schema({
-  conversationId: {
-    type:Schema.Types.ObjectId,
-    ref:'conversations'
-  },
-  profileName: { type:String },
-  userPhone: { type:String },
-  description: { type:String },
-  reportType: { type:String },
-  media: { type:String },
-  evidenceID: { type:String },
-  plate: { type:String },
-  date: { type:Date },
-  reportLocation: { type:Array },
-  riskMatrix: { type:Number },
-  count: { type:Number },
-  driverId: {
-    type:Schema.Types.ObjectId,
-    ref:'drivers'
-  },
-  vehicleId: {
-    type:Schema.Types.ObjectId,
-    ref:'vehicles'
-  },
+  userPhone: { type: String },
+  profileName: { type: String },
   companyId: {
-    type:Schema.Types.ObjectId,
-    ref:'companies'
+    type: Schema.Types.ObjectId,
+    ref: 'companies'
   },
-  isDeleted: { type:Boolean },
-  isActive: { type:Boolean },
-  createdAt: { type:Date },
-  updatedAt: { type:Date },
-  addedBy: {
-    type:Schema.Types.ObjectId,
-    ref:'users'
+  vehicle: {
+    _id: {
+      type: Schema.Types.ObjectId,
+      ref: 'vehicles'
+    },
+    brand: { type: String },
+    model: { type: String },
+    year: { type: Number },
+    color: { type: String },
+    plate: { type: String },
+    vin: { type: String },
+    stickerID: { type: String },
+    companyId: {
+      type: Schema.Types.ObjectId,
+      ref: 'companies'
+    },
+    driverId: {
+      type: Schema.Types.ObjectId,
+      ref: 'drivers'
+    }
   },
-  updatedBy: {
-    type:Schema.Types.ObjectId,
-    ref:'users'
+  reportType: { type: String },
+  reportDetails: { type: String },
+  reportMedia: [{
+    file: { type: String }, // ¿Es una URL? Si es así, pon tipo String
+    id: { type: String }, // Puede ser type Schema.Types.ObjectId si es un ObjectId de MongoDB
+    mime_type: { type: String },
+    sha256: { type: String },
+    caption: { type: String }
+  }],
+  reportLocation: {
+    latitude: { type: Number },
+    longitude: { type: Number }
   },
-  address: { type:String }
-}
-,{ 
+  additionalDetails: { type: String },
+  reportId: { type: String }, // Si es un UUID, déjalo como String
+  date: { type: Date }
+}, { 
   timestamps: { 
     createdAt: 'createdAt', 
     updatedAt: 'updatedAt' 
   } 
-}
-);
+})
 schema.pre('save', async function (next) {
   this.isDeleted = false;
   this.isActive = true;
