@@ -21,6 +21,7 @@ const schema = new Schema({
   year: { type:Number },
   color: { type:String },
   plate: { type:String },
+  imageVehicle: [{ type:String }],
   vin: { type:String },
   stickerID: { type:String },
   companyId: {
