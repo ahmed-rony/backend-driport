@@ -5,14 +5,15 @@ const {
   auth,checkRolePermission,
 } = require('../../../middleware');
 const { PLATFORM } =  require('../../../constants/authConstant'); 
+const { uploadVehicle } = require('../../../middleware/multer');
 
-router.route('/client/api/v1/vehicles/create').post(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.addVehicles);
+router.route('/client/api/v1/vehicles/create').post(auth(PLATFORM.CLIENT),uploadVehicle,checkRolePermission,vehiclesController.addVehicles);
 router.route('/client/api/v1/vehicles/addBulk').post(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.bulkInsertVehicles);
-router.route('/client/api/v1/vehicles/list').post(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.findAllVehicles);//findAllVehicles
+router.route('/client/api/v1/vehicles/list').post(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.findAllVehicles);
 router.route('/client/api/v1/vehicles/count').post(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.getVehiclesCount);
 router.route('/client/api/v1/vehicles/top').get(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.getTopVehicles);
 router.route('/client/api/v1/vehicles/update/:id').put(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.updateVehicles);   
-router.route('/client/api/v1/vehicles/partial-update/:id').put(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.partialUpdateVehicles);   
+router.route('/client/api/v1/vehicles/partial-update/:id').put(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.partialUpdateVehicles);    
 router.route('/client/api/v1/vehicles/updateBulk').put(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.bulkUpdateVehicles); 
 router.route('/client/api/v1/vehicles/softDelete/:id').put(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.softDeleteVehicles);
 router.route('/client/api/v1/vehicles/softDeleteMany').put(auth(PLATFORM.CLIENT),checkRolePermission,vehiclesController.softDeleteManyVehicles);

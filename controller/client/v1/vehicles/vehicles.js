@@ -5,8 +5,9 @@ const getSelectObject = require('../../../../utils/getSelectObject');
 const addVehicles = (addVehiclesUsecase) => async (req,res) => {
   try {
     let dataToCreate = { ...req.body || {} };
+    let fileToCreate = { ...req.files || {} };
     dataToCreate.addedBy = req.user.id;
-    let result = await addVehiclesUsecase(dataToCreate,req,res);
+    let result = await addVehiclesUsecase(dataToCreate, fileToCreate,req,res);
     return responseHandler(res,result);
   } catch (error){
     return responseHandler(res,response.internalServerError({ message:error.message }));
@@ -40,6 +41,7 @@ const findAllVehicles = (findAllVehiclesUsecase) => async (req,res) => {
     },req,res);
     return responseHandler(res,result);
   } catch (error){
+    console.log(error);
     return responseHandler(res,response.internalServerError({ message:error.message }));
   }
 };

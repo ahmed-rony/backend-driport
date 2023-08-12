@@ -9,6 +9,7 @@ module.exports = (vehicles) => {
     vin: vehicles.vin,
     stickerID: vehicles.stickerID,
     companyId: vehicles.companyId,
+    imageVehicle: vehicles.imageVehicle,
     driverId: vehicles.driverId,
     isDeleted: vehicles.isDeleted,
     isActive: vehicles.isActive,
